@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="UrbanDictionary">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/UrbanDictionary.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
