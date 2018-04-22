@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MathSolver">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/MathSolver.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -10,5 +10,6 @@
     <orderEntry type="library" name="telegrambots-3.6-jar-with-dependencies" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.21.0" level="project" />
     <orderEntry type="library" name="UrbanDictionary" level="project" />
+    <orderEntry type="library" name="MathSolver" level="project" />
   </component>
 </module>
