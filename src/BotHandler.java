@@ -1,5 +1,6 @@
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
+import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.ChatMember;
@@ -16,6 +17,7 @@ public class BotHandler extends TelegramLongPollingBot {
     private String rmsg, arg, cmd, username;
     private Message message;
     private boolean echo = false;
+    static  int COUNTER;
 
 
     @Override
@@ -28,21 +30,27 @@ public class BotHandler extends TelegramLongPollingBot {
                 rmsg = message.getText().toString();
                 username = message.getFrom().getUserName().toString();
                 System.out.println(username + ":" + rmsg);
-                if (echo) {
-                    sendMessage(username + ": " + rmsg);
-                }
+
+
                 //sendPhoto("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F67636%2Frose-blue-flower-rose-blooms-67636.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26h%3D350&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fflower%2F&docid=5UbOpOqf9qM23M&tbnid=ZAXhvwKefKr6jM%3A&vet=10ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE..i&w=528&h=350&bih=620&biw=612&q=images&ved=0ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE&iact=mrc&uact=8", "Now has captionk");
                 // COMMAND DOSEN'T TAKE ARGUMENT
                 if (rmsg.contains("/") && !rmsg.contains(" ")) {
                     cmd = message.getText().toString().split("/")[1];
 
-                    if (cmd.equalsIgnoreCase("echo") && !echo) {
-                        echo = true;
-                        sendMessage("Echo is Enabled!");
+                    if (cmd.equalsIgnoreCase("echo") ) {
+                        COUNTER++;
+                        if(COUNTER == 1){
+                            echo = true;
+                            sendMessage("Echo is Enabled!");
 
-                    } else if (cmd.equalsIgnoreCase("echo off")) {
-                        echo = false;
+                        } else {
+                            echo = false;
+                            sendMessage("Echo is Disabled!");
+                            COUNTER = 0;
+                        }
                     }
+
+
 
                 }
                 // COMMAND TAKES ARGUMENT
@@ -61,8 +69,13 @@ public class BotHandler extends TelegramLongPollingBot {
                         } else {
                             sendMessage("No definition found!");
                         }
+                    } else if(cmd.equalsIgnoreCase("/math")){
+                            sendMessage(MathSolver.solve(arg));
+
                     }
 
+                } if (echo && !rmsg.equals("/echo")) {
+                    sendMessage(username + ": " + rmsg);
                 }
             }
         }
