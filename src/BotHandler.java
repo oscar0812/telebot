@@ -27,9 +27,7 @@ public class BotHandler extends TelegramLongPollingBot {
                 if (rmsg.contains("/") && !rmsg.contains(" ")) {
                     cmd = message.getText().toString().split("/")[1];
 
-                    if (cmd.equalsIgnoreCase("test")) {
-                        sendMessage("bbc pornos");
-                    } else if (cmd.equalsIgnoreCase("echo") && !echo) {
+                    if (cmd.equalsIgnoreCase("echo") && !echo) {
                         echo = true;
                         sendMessage("Echo is Enabled!");
 
@@ -38,12 +36,13 @@ public class BotHandler extends TelegramLongPollingBot {
                     }
 
 
-                    // COMMAND TAKES ARGUMENT
-                } else if (rmsg.startsWith("/") && rmsg.contains(" ")) {
-                    cmd = message.getText().toString().split("/")[1].split(" ")[0];
-                    arg = rmsg.split("/say")[1];
+                }
+                // COMMAND TAKES ARGUMENT
+                else if (rmsg.contains(" ") && rmsg.startsWith("/")) {
+                    cmd = rmsg.split("\\s+")[0];
+                    arg = rmsg.split("\\s+")[1];
 
-                    if (cmd.equals("say")) {
+                    if (cmd.equals("/say")) {
                         sendMessage(arg);
                     }
 

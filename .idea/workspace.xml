@@ -28,8 +28,8 @@
       <file leaf-file-name="BotHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BotHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
+            <state relative-caret-position="183">
+              <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -148,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Database">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Database" />
       <module name="TeleBot" />
@@ -206,8 +206,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Database" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Database" />
       </list>
     </recent_temporary>
   </component>
@@ -221,12 +221,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1524346655233</updated>
-      <workItem from="1524346660176" duration="8461000" />
+      <workItem from="1524346660176" duration="9040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8461000" />
+    <option name="totallyTimeSpent" value="9040000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
@@ -249,10 +249,10 @@
       <window_info id="Image Layers" />
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32921174" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32921174" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32921174" />
       <window_info anchor="right" id="Theme Preview" />
@@ -313,8 +313,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BotHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="75" column="1" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
+        <state relative-caret-position="183">
+          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
