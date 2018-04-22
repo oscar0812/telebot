@@ -40,7 +40,7 @@ public class BotHandler extends TelegramLongPollingBot {
                 // COMMAND TAKES ARGUMENT
                 else if (rmsg.contains(" ") && rmsg.startsWith("/")) {
                     cmd = rmsg.split("\\s+")[0];
-                    arg = rmsg.split("\\s+")[1];
+                    arg = rmsg.substring(rmsg.indexOf(" ")).trim();
 
                     if (cmd.equals("/say")) {
                         sendMessage(arg);
