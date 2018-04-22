@@ -5,7 +5,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 public class BotHandler extends TelegramLongPollingBot {
-    private String rmsg,arg,cmd,username;
+    private String rmsg, arg, cmd, username;
     private Message message;
     private boolean echo = false;
 
@@ -18,42 +18,41 @@ public class BotHandler extends TelegramLongPollingBot {
             if (message.hasText()) {
                 rmsg = message.getText().toString();
                 username = message.getFrom().getUserName().toString();
-                System.out.println(username+":" +rmsg);
+                System.out.println(username + ":" + rmsg);
                 if (echo) {
-                    sendMessage(username +": " + rmsg);
+                    sendMessage(username + ": " + rmsg);
                 }
 
                 // COMMAND DOSEN'T TAKE ARGUMENT
-                if(rmsg.contains("/") && !rmsg.contains(" ")){
+                if (rmsg.contains("/") && !rmsg.contains(" ")) {
                     cmd = message.getText().toString().split("/")[1];
 
-                    if(cmd.equalsIgnoreCase("test")) {
+                    if (cmd.equalsIgnoreCase("test")) {
                         sendMessage("bbc pornos");
                     } else if (cmd.equalsIgnoreCase("echo") && !echo) {
                         echo = true;
                         sendMessage("Echo is Enabled!");
 
-                    } else if (cmd.equalsIgnoreCase("echo off")){
+                    } else if (cmd.equalsIgnoreCase("echo off")) {
                         echo = false;
                     }
 
 
-
                     // COMMAND TAKES ARGUMENT
-                } else if (rmsg.startsWith("/") && rmsg.contains(" ")){
+                } else if (rmsg.startsWith("/") && rmsg.contains(" ")) {
                     cmd = message.getText().toString().split("/")[1].split(" ")[0];
                     arg = rmsg.split("/say")[1];
 
-                    if(cmd.equals("say")){
+                    if (cmd.equals("say")) {
                         sendMessage(arg);
                     }
-
 
 
                 }
             }
         }
     }
+
     @Override
     public String getBotUsername() {
         return "intellij_bot";
@@ -64,7 +63,7 @@ public class BotHandler extends TelegramLongPollingBot {
         return "508112557:AAFOC-R-KXsFniSQSVmGOBT4iSRMWMx2URA";
     }
 
-    public void sendMessage(String args){
+    public void sendMessage(String args) {
         SendMessage sendMessageRequest = new SendMessage();
         sendMessageRequest.setChatId(message.getChatId().toString());
         sendMessageRequest.setText(args);
