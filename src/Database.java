@@ -2,7 +2,6 @@ import java.sql.*;
 
 class Database {
     // TODO: add taboo game
-
     private static Database db = null;
 
     public static Database getInstance() {
