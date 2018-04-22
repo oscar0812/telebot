@@ -11,7 +11,7 @@ public class BotHandler extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        
+
         if (update.hasMessage()) {
             message = update.getMessage();
 
