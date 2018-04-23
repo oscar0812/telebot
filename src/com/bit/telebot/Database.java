@@ -39,8 +39,9 @@ public class Database {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME + "("
                 + "	username text NOT NULL UNIQUE,\n"
                 + "	type_score INTEGER NOT NULL,\n"
-                + " scramble_score INTEGER NOT NULL,"
-                + " taboo_score INTEGER NOT NULL"
+                + " scramble_score INTEGER NOT NULL,\n"
+                + " taboo_score INTEGER NOT NULL,\n"
+                + " guess_score INTEGER NOT NULL"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(DB_NAME);
@@ -60,8 +61,6 @@ public class Database {
                 + "	username text NOT NULL UNIQUE,\n"
                 + "	is_dev BIT NOT NULL"
                 + ");";
-        addDev("OGBittle");
-        addDev("Bit_assesive");
         try (Connection conn = DriverManager.getConnection(DB_NAME);
              Statement stmt = conn.createStatement()) {
             // create a new table
@@ -85,7 +84,7 @@ public class Database {
 
     // com.bit.telebot.game methods
     private void createGameEntry(String username) {
-        String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score) VALUES(?, 0, 0, 0)";
+        String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score,guess_score) VALUES(?, 0, 0, 0,0)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -125,6 +124,10 @@ public class Database {
         incrementScore(username, "taboo_score");
     }
 
+    public void incrementGuessScore(String username) {
+        incrementScore(username, "guess_score");
+    }
+
     private long getScore(String username, String game_name) {
         createGameEntry(username);
         String sql = "SELECT " + game_name + " "
@@ -159,6 +162,10 @@ public class Database {
 
     public long getTabooScore(String username) {
         return getScore(username, "taboo_score");
+    }
+
+    public long getGuessScore(String username){
+        return getScore(username, "guess_score");
     }
 
     // admin methods

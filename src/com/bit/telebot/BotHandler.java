@@ -2,7 +2,7 @@ package com.bit.telebot;
 
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
-import com.bit.telebot.game.Game;
+import com.bit.telebot.game.GameHandler;
 import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
@@ -26,7 +26,7 @@ public class BotHandler extends TelegramLongPollingBot {
             User message_sender = message.getFrom();
 
             if (message.hasText()) {
-                Game.check(this, update);
+                GameHandler.check(this, update);
                 rmsg = message.getText();
                 username = message.getFrom().getUserName();
                 System.out.println(username + ":" + rmsg);

@@ -10,7 +10,7 @@ import org.telegram.telegrambots.api.objects.User;
 
 import java.util.HashMap;
 
-public class Game {
+public class GameHandler {
 
     private static class CurrentGame {
         private String current_type_word = "";
@@ -21,6 +21,8 @@ public class Game {
         private boolean is_type = false;
         private boolean is_scramble = false;
         private boolean is_taboo = false;
+
+        private ImageGuess guessGame = null;
     }
 
     // to play separate games on separate groups
@@ -34,10 +36,10 @@ public class Game {
         if (currentGames.containsKey(chat_id))
             current = currentGames.get(chat_id);
 
-        check(handler, update, current); // check if its a com.bit.telebot.game command
+        check(handler, update, current); // check if its a game command
     }
 
-    // check if its a command for a com.bit.telebot.game
+    // check if its a command for a game
     private static void check(BotHandler handler, Update update, CurrentGame current) {
 
         Message message = update.getMessage();
@@ -49,18 +51,17 @@ public class Game {
 
         // check here if games are on (not implemented yet)
 
-        // type com.bit.telebot.game win
+        String username = message_sender.getUserName();
+        // type game win
         if (current != null && current.is_type && message_text_lower.equals(current.current_type_word)) {
-            String username = message_sender.getUserName();
             Database.getInstance().incrementTypeScore(username);
             current.is_type = false;
             current.current_type_word = "";
             handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // scramble com.bit.telebot.game win
+        // scramble game win
         if (current != null && current.is_scramble && message_text_lower.equals(current.current_unscrambled_word)) {
-            String username = message_sender.getUserName();
             Database.getInstance().incrementScrambleScore(username);
             current.is_scramble = false;
             current.current_scramble_word = "";
@@ -68,26 +69,30 @@ public class Game {
             handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // taboo com.bit.telebot.game cheat
+        // taboo game cheat
         if (current != null && current.is_taboo && message_text_lower.contains(current.current_taboo_word)
                 && message_sender.getUserName().equals(current.player_username)) {
-            String username = message_sender.getUserName();
             handler.sendMessage(username + " is a cheater!\n\n" +
                     current.current_taboo_word + " was the word.", message.getChatId());
             current.is_taboo = false;
             current.current_taboo_word = "";
         }
 
-        // taboo com.bit.telebot.game win
-        else if (current != null && current.is_taboo && message_text_lower.contains(current.current_taboo_word)) {
-            String username = message_sender.getUserName();
+        // taboo game win
+        else if (current != null && current.is_taboo && message_text_lower.equals(current.current_taboo_word)) {
             Database.getInstance().incrementTabooScore(username);
             current.is_taboo = false;
             current.current_taboo_word = "";
             handler.sendMessage(username + " has won!", message.getChatId());
+
+        // guess game win
+        } else if(current != null && current.guessGame != null && message_text_lower.contains(current.guessGame.getAnswer())){
+            Database.getInstance().incrementGuessScore(username);
+            current.guessGame = null;
+            handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // check if trying to start a com.bit.telebot.game
+        // check if trying to start a game
         String bot_say_this = "";
 
         switch (message_text_lower) {
@@ -138,7 +143,7 @@ public class Game {
                     }
                     CurrentGame game = currentGames.get(chat_id);
                     if (!game.current_taboo_word.isEmpty()) {
-                        //sendTextMessage(chat_id, com.bit.telebot.game.player_username + " has the word.", message);
+                        //sendTextMessage(chat_id, game.player_username + " has the word.", message);
                     } else {
                         game.current_taboo_word = dictionary.getRandomWord();
                         game.player_username = message_sender.getUserName();
@@ -150,9 +155,24 @@ public class Game {
                     bot_say_this = "Taboo must be played in group chats.";
                 }
                 break;
-            case "/brick":
-                // implement brick
+            case "/guess":
+                if (currentGames.containsKey(chat_id)) {
+                    // guess was already started
+                    CurrentGame game = currentGames.get(chat_id);
+                    if (game.guessGame == null) {
+                        game.guessGame = ImageGuess.random();
+                    }
 
+                    handler.sendPhoto(game.guessGame.getUrl());
+                } else {
+                    // new guess
+                    CurrentGame game = new CurrentGame();
+                    game.guessGame = ImageGuess.random();
+                    currentGames.put(chat_id, game);
+
+                    // send image here
+                    handler.sendPhoto(game.guessGame.getUrl());
+                }
                 break;
         }
 
@@ -182,9 +202,11 @@ public class Game {
         } else if (message_text_lower.equals("/scores")) {
             // trying to get scores
             Database d = Database.getInstance();
-            bot_say_this = "Type: " + d.getTypeScore(message_sender.getUserName()) +
+            bot_say_this = "Type: " + d.getTypeScore(message_sender.getUserName())+
                     "\nScramble: " + d.getScrambleScore(message_sender.getUserName()) +
-                    "\nTaboo: " + d.getTabooScore(message_sender.getUserName());
+                    "\nTaboo: " + d.getTabooScore(message_sender.getUserName()) +
+                    "\nGuess: " + d.getGuessScore(message_sender.getUserName());
+
         }
 
         if (!bot_say_this.isEmpty())
