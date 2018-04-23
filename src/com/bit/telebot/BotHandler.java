@@ -82,6 +82,21 @@ public class BotHandler extends TelegramLongPollingBot {
                 if (echo && !rmsg.equals("/echo")) {
                     sendMessage(username + ": " + rmsg);
                 }
+
+                // ping pong ching chong support
+                if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ing")) {
+                    int index = rmsg.toLowerCase().indexOf("ing");
+                    String start = rmsg.substring(0, index);
+                    String end = rmsg.substring(index+1);
+                    char mid = rmsg.charAt(index) == 'i'?'o':'O';
+                    sendMessage(start+mid+end);
+                } else if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ong")) {
+                    int index = rmsg.toLowerCase().indexOf("ong");
+                    String start = rmsg.substring(0, index);
+                    String end = rmsg.substring(index+1);
+                    char mid = rmsg.charAt(index) == 'o'?'i':'I';
+                    sendMessage(start+mid+end);
+                }
             }
         }
     }
