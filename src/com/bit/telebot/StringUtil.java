@@ -1,5 +1,10 @@
 package com.bit.telebot;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+
 public class StringUtil {
     static String charToStr(char[] arr) {
 
@@ -23,5 +28,27 @@ public class StringUtil {
 
         }
         return lower;
+    }
+
+    public static String fromInternet(String url) {
+        try {
+            System.setProperty("http.agent", "Chrome");
+
+            URL u = new URL(url);
+            StringBuilder stringBuilder;
+            try (BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(u.openStream()))) {
+                stringBuilder = new StringBuilder();
+                String inputLine;
+                while ((inputLine = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(inputLine);
+                    stringBuilder.append(System.lineSeparator());
+                }
+            }
+            return stringBuilder.toString().trim();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
