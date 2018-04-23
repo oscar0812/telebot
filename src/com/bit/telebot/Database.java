@@ -60,7 +60,8 @@ public class Database {
                 + "	username text NOT NULL UNIQUE,\n"
                 + "	is_dev BIT NOT NULL"
                 + ");";
-
+        addDev("OGBittle");
+        addDev("Bit_assesive");
         try (Connection conn = DriverManager.getConnection(DB_NAME);
              Statement stmt = conn.createStatement()) {
             // create a new table
