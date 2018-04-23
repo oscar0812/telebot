@@ -1,7 +1,7 @@
 import java.sql.*;
 
 class Database {
-    // TODO: add taboo game
+
     private static Database db = null;
 
     public static Database getInstance() {
@@ -12,13 +12,11 @@ class Database {
     }
 
     private final String DB_NAME = "jdbc:sqlite:database.db";
-    private final String GAME_TABLE = "game";
-    private final String ADMIN_TABLE = "admin";
+    private final String TABLE_GAME = "game";
 
-    private Database() {
+    public Database() {
         createDatabase();
         createGameTable();
-        createAdminTable();
     }
 
     private void createDatabase() {
@@ -31,26 +29,15 @@ class Database {
     }
 
     private void createGameTable() {
-        // create game table
-        String sql = "CREATE TABLE IF NOT EXISTS " + GAME_TABLE + " (\n"
+        // SQLite connection string
+
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME + "("
                 + "	username text NOT NULL UNIQUE,\n"
-                + "	type_score integer NOT NULL,\n"
-                + " taboo integer NOT NULL,\n"
+                + "	type_score INTEGER NOT NULL,\n"
+                + " scramble_score INTEGER NOT NULL,"
+                + " taboo_score INTEGER NOT NULL"
                 + ");";
-
-        try (Connection conn = DriverManager.getConnection(DB_NAME);
-             Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void createAdminTable(){
-        // create admin table
-        String sql = "CREATE TABLE IF NOT EXISTS " + ADMIN_TABLE + " (\n"
-                + "	username text NOT NULL UNIQUE);";
 
         try (Connection conn = DriverManager.getConnection(DB_NAME);
              Statement stmt = conn.createStatement()) {
@@ -73,29 +60,24 @@ class Database {
         return conn;
     }
 
-    // game methods
-    private void createGameEntry(String username){
-        // create a user if not exist in db
-        String sql = "INSERT OR IGNORE INTO "+GAME_TABLE+
-                "(username, type_score) VALUES (?,?)";
+    private void createGameEntry(String username) {
+        String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score) VALUES(?, 0, 0, 0)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
-            pstmt.setInt(2, 0);
             pstmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
-
     }
-    public void incrementTypeScore(String username) {
+
+    private void incrementScore(String username, String game_name){
         // try to update the type score for the username, if not successful it means that
         // that user is not in db, so add em with a 1 score for type
         createGameEntry(username);
-
-        String sql = "UPDATE "+GAME_TABLE+
-                " SET type_score = type_score + 1" +
+        String sql = "UPDATE "+TABLE_GAME+
+                " SET "+game_name+" = "+game_name+" + 1" +
                 " WHERE username = ?";
 
         try (Connection conn = this.connect();
@@ -107,23 +89,50 @@ class Database {
         }
     }
 
-    public int getTypeScore(String username){
-        String sql = "SELECT type_score "
-                + "FROM "+GAME_TABLE+" WHERE username = ?";
+    public void incrementTypeScore(String username) {
+        incrementScore(username, "type_score");
+    }
+
+    public void incrementScrambleScore(String username) {
+        incrementScore(username, "scramble_score");
+    }
+
+    public void incrementTabooScore(String username) {
+        incrementScore(username, "taboo_score");
+    }
+
+    private long getScore(String username, String game_name){
+        String sql = "SELECT "+game_name+" "
+                + "FROM "+TABLE_GAME+" WHERE username = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
             // set the value
             pstmt.setString(1, username);
+
             ResultSet rs  = pstmt.executeQuery();
+
             // loop through the result set
             if (rs.next()) {
-                return rs.getInt("type_score");
+                return rs.getInt(game_name);
             }
-            return 0;
+            return -1;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return -1;
+            return -2;
         }
+    }
+
+    public long getTypeScore(String username){
+        return getScore(username, "type_score");
+    }
+
+    public long getScrambleScore(String username){
+        return getScore(username, "scramble_score");
+    }
+
+    public long getTabooScore(String username){
+        return getScore(username, "taboo_score");
     }
 }

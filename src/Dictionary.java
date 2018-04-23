@@ -1026,11 +1026,3 @@ public class Dictionary {
         return arr;
     }
 }
-
-
-
-class skid{
-    public static void main (String args []){
-        System.out.println("I am a skid!");
-    }
-}

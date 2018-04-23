@@ -3,22 +3,16 @@ import com.bittle.urban.UrbanDictionary;
 import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.api.objects.ChatMember;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import org.telegram.telegrambots.exceptions.TelegramApiValidationException;
-
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
 
 public class BotHandler extends TelegramLongPollingBot {
     private String rmsg, arg, cmd, username;
     private Message message;
     private boolean echo = false;
-    static  int COUNTER;
-
+    static int COUNTER;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -27,19 +21,20 @@ public class BotHandler extends TelegramLongPollingBot {
             message = update.getMessage();
 
             if (message.hasText()) {
-                rmsg = message.getText().toString();
-                username = message.getFrom().getUserName().toString();
+                Game.check(this, update);
+                rmsg = message.getText();
+                username = message.getFrom().getUserName();
                 System.out.println(username + ":" + rmsg);
 
 
                 //sendPhoto("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F67636%2Frose-blue-flower-rose-blooms-67636.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26h%3D350&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fflower%2F&docid=5UbOpOqf9qM23M&tbnid=ZAXhvwKefKr6jM%3A&vet=10ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE..i&w=528&h=350&bih=620&biw=612&q=images&ved=0ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE&iact=mrc&uact=8", "Now has captionk");
                 // COMMAND DOSEN'T TAKE ARGUMENT
                 if (rmsg.contains("/") && !rmsg.contains(" ")) {
-                    cmd = message.getText().toString().split("/")[1];
+                    cmd = message.getText().split("/")[1];
 
-                    if (cmd.equalsIgnoreCase("echo") ) {
+                    if (cmd.equalsIgnoreCase("echo")) {
                         COUNTER++;
-                        if(COUNTER == 1){
+                        if (COUNTER == 1) {
                             echo = true;
                             sendMessage("Echo is Enabled!");
 
@@ -49,7 +44,6 @@ public class BotHandler extends TelegramLongPollingBot {
                             COUNTER = 0;
                         }
                     }
-
 
 
                 }
@@ -69,12 +63,13 @@ public class BotHandler extends TelegramLongPollingBot {
                         } else {
                             sendMessage("No definition found!");
                         }
-                    } else if(cmd.equalsIgnoreCase("/math")){
-                            sendMessage(MathSolver.solve(arg));
+                    } else if (cmd.equalsIgnoreCase("/math")) {
+                        sendMessage(MathSolver.solve(arg));
 
                     }
 
-                } if (echo && !rmsg.equals("/echo")) {
+                }
+                if (echo && !rmsg.equals("/echo")) {
                     sendMessage(username + ": " + rmsg);
                 }
             }
@@ -83,12 +78,12 @@ public class BotHandler extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "intellij_bot";
+        return Constants.BOT_USERNAME;
     }
 
     @Override
     public String getBotToken() {
-        return "508112557:AAFOC-R-KXsFniSQSVmGOBT4iSRMWMx2URA";
+        return Constants.BOT_TOKEN;
     }
 
     public void sendMessage(String args) {
@@ -101,7 +96,19 @@ public class BotHandler extends TelegramLongPollingBot {
             e.printStackTrace();
         }
     }
-    public void sendPhoto(String args){
+
+    public void sendMessage(String args, long chat_id) {
+        SendMessage sendMessageRequest = new SendMessage();
+        sendMessageRequest.setChatId(chat_id);
+        sendMessageRequest.setText(args);
+        try {
+            execute(sendMessageRequest);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendPhoto(String args) {
         SendPhoto sendPhotoRequest = new SendPhoto();
         sendPhotoRequest.setChatId(message.getChatId().toString());
         sendPhotoRequest.setPhoto(args);
@@ -112,7 +119,8 @@ public class BotHandler extends TelegramLongPollingBot {
             e.printStackTrace();
         }
     }
-    public void sendPhoto(String args, String caption){
+
+    public void sendPhoto(String args, String caption) {
         SendPhoto sendPhotoRequest = new SendPhoto();
         sendPhotoRequest.setChatId(message.getChatId().toString());
         sendPhotoRequest.setPhoto(args);
