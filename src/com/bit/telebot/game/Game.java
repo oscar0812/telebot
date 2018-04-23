@@ -1,3 +1,9 @@
+package com.bit.telebot.game;
+
+import com.bit.telebot.BotHandler;
+import com.bit.telebot.Database;
+import com.bit.telebot.Dictionary;
+import com.bit.telebot.StringUtil;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
@@ -28,10 +34,10 @@ public class Game {
         if (currentGames.containsKey(chat_id))
             current = currentGames.get(chat_id);
 
-        check(handler, update, current); // check if its a game command
+        check(handler, update, current); // check if its a com.bit.telebot.game command
     }
 
-    // check if its a command for a game
+    // check if its a command for a com.bit.telebot.game
     private static void check(BotHandler handler, Update update, CurrentGame current) {
 
         Message message = update.getMessage();
@@ -43,7 +49,7 @@ public class Game {
 
         // check here if games are on (not implemented yet)
 
-        // type game win
+        // type com.bit.telebot.game win
         if (current != null && current.is_type && message_text_lower.equals(current.current_type_word)) {
             String username = message_sender.getUserName();
             Database.getInstance().incrementTypeScore(username);
@@ -52,7 +58,7 @@ public class Game {
             handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // scramble game win
+        // scramble com.bit.telebot.game win
         if (current != null && current.is_scramble && message_text_lower.equals(current.current_unscrambled_word)) {
             String username = message_sender.getUserName();
             Database.getInstance().incrementScrambleScore(username);
@@ -62,7 +68,7 @@ public class Game {
             handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // taboo game cheat
+        // taboo com.bit.telebot.game cheat
         if (current != null && current.is_taboo && message_text_lower.contains(current.current_taboo_word)
                 && message_sender.getUserName().equals(current.player_username)) {
             String username = message_sender.getUserName();
@@ -72,7 +78,7 @@ public class Game {
             current.current_taboo_word = "";
         }
 
-        // taboo game win
+        // taboo com.bit.telebot.game win
         else if (current != null && current.is_taboo && message_text_lower.contains(current.current_taboo_word)) {
             String username = message_sender.getUserName();
             Database.getInstance().incrementTabooScore(username);
@@ -81,7 +87,7 @@ public class Game {
             handler.sendMessage(username + " has won!", message.getChatId());
         }
 
-        // check if trying to start a game
+        // check if trying to start a com.bit.telebot.game
         String bot_say_this = "";
 
         switch (message_text_lower) {
@@ -132,7 +138,7 @@ public class Game {
                     }
                     CurrentGame game = currentGames.get(chat_id);
                     if (!game.current_taboo_word.isEmpty()) {
-                        //sendTextMessage(chat_id, game.player_username + " has the word.", message);
+                        //sendTextMessage(chat_id, com.bit.telebot.game.player_username + " has the word.", message);
                     } else {
                         game.current_taboo_word = dictionary.getRandomWord();
                         game.player_username = message_sender.getUserName();

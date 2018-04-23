@@ -1,5 +1,8 @@
+package com.bit.telebot;
+
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
+import com.bit.telebot.game.Game;
 import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;

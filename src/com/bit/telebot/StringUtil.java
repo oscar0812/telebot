@@ -1,3 +1,5 @@
+package com.bit.telebot;
+
 public class StringUtil {
     static String charToStr(char[] arr) {
 

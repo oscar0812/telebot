@@ -1,6 +1,8 @@
+package com.bit.telebot;
+
 import java.sql.*;
 
-class Database {
+public class Database {
 
     private static Database db = null;
 
@@ -80,7 +82,7 @@ class Database {
         return conn;
     }
 
-    // game methods
+    // com.bit.telebot.game methods
     private void createGameEntry(String username) {
         String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score) VALUES(?, 0, 0, 0)";
 
