@@ -21,6 +21,8 @@ public class Database {
         createDatabase();
         createGameTable();
         createAdminTable();
+        addDev("OGBittle");
+        addDev("Bit_assesive");
     }
 
     private void createDatabase() {
@@ -33,8 +35,6 @@ public class Database {
     }
 
     private void createGameTable() {
-        // SQLite connection string
-
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME + "("
                 + "	username text NOT NULL UNIQUE,\n"
@@ -233,9 +233,5 @@ public class Database {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String[] args){
-        Database.getInstance().addDev("OGBittle");
     }
 }
