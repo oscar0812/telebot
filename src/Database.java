@@ -13,10 +13,12 @@ class Database {
 
     private final String DB_NAME = "jdbc:sqlite:database.db";
     private final String TABLE_GAME = "game";
+    private final String TABLE_ADMIN = "admin";
 
     public Database() {
         createDatabase();
         createGameTable();
+        createAdminTable();
     }
 
     private void createDatabase() {
@@ -48,6 +50,24 @@ class Database {
         }
     }
 
+    private void createAdminTable() {
+        // SQLite connection string
+
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_ADMIN + "("
+                + "	username text NOT NULL UNIQUE,\n"
+                + "	is_dev BIT NOT NULL"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(DB_NAME);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private Connection connect() {
         // SQLite connection string
         Connection conn = null;
@@ -60,6 +80,7 @@ class Database {
         return conn;
     }
 
+    // game methods
     private void createGameEntry(String username) {
         String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score) VALUES(?, 0, 0, 0)";
 
@@ -72,12 +93,12 @@ class Database {
         }
     }
 
-    private void incrementScore(String username, String game_name){
+    private void incrementScore(String username, String game_name) {
         // try to update the type score for the username, if not successful it means that
         // that user is not in db, so add em with a 1 score for type
         createGameEntry(username);
-        String sql = "UPDATE "+TABLE_GAME+
-                " SET "+game_name+" = "+game_name+" + 1" +
+        String sql = "UPDATE " + TABLE_GAME +
+                " SET " + game_name + " = " + game_name + " + 1" +
                 " WHERE username = ?";
 
         try (Connection conn = this.connect();
@@ -101,17 +122,18 @@ class Database {
         incrementScore(username, "taboo_score");
     }
 
-    private long getScore(String username, String game_name){
-        String sql = "SELECT "+game_name+" "
-                + "FROM "+TABLE_GAME+" WHERE username = ?";
+    private long getScore(String username, String game_name) {
+        createGameEntry(username);
+        String sql = "SELECT " + game_name + " "
+                + "FROM " + TABLE_GAME + " WHERE username = ?";
 
         try (Connection conn = this.connect();
-             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the value
             pstmt.setString(1, username);
 
-            ResultSet rs  = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
 
             // loop through the result set
             if (rs.next()) {
@@ -124,15 +146,93 @@ class Database {
         }
     }
 
-    public long getTypeScore(String username){
+    public long getTypeScore(String username) {
         return getScore(username, "type_score");
     }
 
-    public long getScrambleScore(String username){
+    public long getScrambleScore(String username) {
         return getScore(username, "scramble_score");
     }
 
-    public long getTabooScore(String username){
+    public long getTabooScore(String username) {
         return getScore(username, "taboo_score");
+    }
+
+    // admin methods
+    public boolean isAdmin(String username) {
+        String sql = "SELECT username "
+                + "FROM " + TABLE_ADMIN + " WHERE username = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the value
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            // loop through the result set
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isDev(String username) {
+        String sql = "SELECT is_dev "
+                + "FROM " + TABLE_ADMIN + " WHERE username = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the value
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getBoolean("is_dev");
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public void addAdmin(String username){
+        String sql = "INSERT INTO " + TABLE_ADMIN + "(username,is_dev) VALUES(?, 0)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            //System.out.println(e.getMessage());
+        }
+    }
+
+    public void addDev(String username){
+        addAdmin(username);
+
+        String sql = "UPDATE " + TABLE_ADMIN +
+                " SET is_dev = 1" +
+                " WHERE username = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args){
+        Database.getInstance().addDev("OGBittle");
     }
 }

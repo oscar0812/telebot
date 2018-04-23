@@ -5,6 +5,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
@@ -19,6 +20,7 @@ public class BotHandler extends TelegramLongPollingBot {
 
         if (update.hasMessage()) {
             message = update.getMessage();
+            User message_sender = message.getFrom();
 
             if (message.hasText()) {
                 Game.check(this, update);
@@ -66,6 +68,11 @@ public class BotHandler extends TelegramLongPollingBot {
                     } else if (cmd.equalsIgnoreCase("/math")) {
                         sendMessage(MathSolver.solve(arg));
 
+                    } else if(!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
+                            && Database.getInstance().isDev(message_sender.getUserName())){
+
+                        Database.getInstance().addAdmin(arg);
+                        sendMessage("Added admin "+arg);
                     }
 
                 }

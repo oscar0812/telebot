@@ -149,16 +149,39 @@ public class Game {
 
                 break;
         }
+
+        if (message_text_lower.equals("/reset") && Database.getInstance().isAdmin(message_sender.getUserName())) {
+            if (currentGames.containsKey(chat_id) && current != null) {
+                String all = "";
+                if (!current.current_type_word.isEmpty()) {
+                    all += "Type: " + current.current_type_word + "\n\n";
+                }
+                if (!current.current_unscrambled_word.isEmpty()) {
+                    all += "Scramble answer: " + current.current_unscrambled_word + "\n\n";
+                }
+                if (!current.current_taboo_word.isEmpty()) {
+                    all += "Taboo answer: " + current.current_taboo_word + "\n\n";
+                }
+
+                if (!all.trim().isEmpty())
+                    bot_say_this = "Games cleared\n\n" + all.trim();
+                else
+                    bot_say_this = "Nothing to reset.";
+                currentGames.remove(chat_id);
+            } else {
+                bot_say_this = "Nothing to reset.";
+
+            }
+
+        } else if (message_text_lower.equals("/scores")) {
+            // trying to get scores
+            Database d = Database.getInstance();
+            bot_say_this = "Type: " + d.getTypeScore(message_sender.getUserName()) +
+                    "\nScramble: " + d.getScrambleScore(message_sender.getUserName()) +
+                    "\nTaboo: " + d.getTabooScore(message_sender.getUserName());
+        }
+
         if (!bot_say_this.isEmpty())
             handler.sendMessage(bot_say_this);
-
-        // trying to get scores
-        if(message_text_lower.equals("/scores")){
-            Database d = Database.getInstance();
-            String t = "Type: "+d.getTypeScore(message_sender.getUserName())+
-                    "\nScramble: "+d.getScrambleScore(message_sender.getUserName())+
-                    "\nTaboo: "+d.getTabooScore(message_sender.getUserName());
-            handler.sendMessage(t);
-        }
     }
 }
