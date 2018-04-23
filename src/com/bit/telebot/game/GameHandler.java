@@ -143,7 +143,7 @@ public class GameHandler {
                     }
                     CurrentGame game = currentGames.get(chat_id);
                     if (!game.current_taboo_word.isEmpty()) {
-                        //sendTextMessage(chat_id, game.player_username + " has the word.", message);
+                        handler.sendMessage(game.player_username + " has the word.", chat_id);
                     } else {
                         game.current_taboo_word = dictionary.getRandomWord();
                         game.player_username = message_sender.getUserName();

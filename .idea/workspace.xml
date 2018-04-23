@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f619f4d-0848-4cf9-baf4-f093482a9b27" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/BotHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Database.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Dictionary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Game$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Game$CurrentGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/StringUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,8 +41,8 @@
       <file leaf-file-name="GameHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="89" column="12" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
+            <state relative-caret-position="381">
+              <caret line="145" column="85" lean-forward="true" selection-start-line="145" selection-start-column="85" selection-end-line="145" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -282,12 +270,12 @@
       <updated>1524346655233</updated>
       <workItem from="1524346660176" duration="10255000" />
       <workItem from="1524436466793" duration="7143000" />
-      <workItem from="1524498097810" duration="4668000" />
+      <workItem from="1524498097810" duration="4785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22066000" />
+    <option name="totallyTimeSpent" value="22183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
@@ -310,7 +298,7 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32921174" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32921174" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -536,8 +524,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="89" column="12" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
+        <state relative-caret-position="381">
+          <caret line="145" column="85" lean-forward="true" selection-start-line="145" selection-start-column="85" selection-end-line="145" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
