@@ -85,7 +85,7 @@ public class BotHandler extends TelegramLongPollingBot {
 
                 // ping pong ching chong support
                 if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ing")) {
-                    int index = rmsg.toLowerCase().indexOf("ing");
+                    int index = rmsg.toLowerCase().lastIndexOf("ing");
                     String start = rmsg.substring(0, index);
                     String end = rmsg.substring(index+1);
                     char mid = rmsg.charAt(index) == 'i'?'o':'O';

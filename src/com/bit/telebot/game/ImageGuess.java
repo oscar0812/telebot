@@ -43,11 +43,21 @@ class ImageGuess{
 
         l.add(new ImageGuess("https://images.pexels.com/photos/955193/pexels-photo-955193.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "book"));
         l.add(new ImageGuess("https://images.pexels.com/photos/978819/pexels-photo-978819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "cat"));
+        //Pokemon
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2F979%2Fpikachu-birthday-event-pokemon.jpg&imgrefurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2Fen%2Fbirthday-events%2F111-pikachu-birthday-event-pokemon.html&docid=xu9Rh4WdpaG2VM&tbnid=R3gdwER6OYsmSM%3A&vet=10ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI..i&w=1000&h=1000&bih=620&biw=612&q=Pikachu&ved=0ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI&iact=mrc&uact=8","pikachu"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F0%2F00%2F359Absol.png%2F250px-359Absol.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FAbsol_(Pok%25C3%25A9mon)&docid=3x4zECFPqJ5k3M&tbnid=q9qQMYxf0oJkNM%3A&vet=10ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA..i&w=250&h=250&bih=620&biw=612&q=Absol&ved=0ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA&iact=mrc&uact=8","absol"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F9%2F9b%2F778Mimikyu.png%2F1200px-778Mimikyu.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FMimikyu_(Pok%25C3%25A9mon)&docid=qZAvA9xEjZfWQM&tbnid=f4g2qCG_O6tSNM%3A&vet=10ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA..i&w=1200&h=1200&bih=636&biw=1242&q=Mimikyu&ved=0ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA&iact=mrc&uact=8","mimikyu"));
+
+        l.add(new ImageGuess("https://logorealm.com/nike-logo/", "nike"));
+
+
     }
 
     static ImageGuess random(){
         if(l.isEmpty())
             initList();
-        return l.get(new Random().nextInt(l.size()));
+        return l.get(l.size()-1);
+        //return l.get(new Random().nextInt(l.size()));
     }
 }
+
