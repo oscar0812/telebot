@@ -49,6 +49,8 @@ public class GameHandler {
         String message_text_lower = message_text.toLowerCase();
         User message_sender = message.getFrom();
 
+        Casino.check(handler, message_text);
+
         // check here if games are on (not implemented yet)
 
         String username = message_sender.getUserName();

@@ -41,7 +41,8 @@ public class Database {
                 + "	type_score INTEGER NOT NULL,\n"
                 + " scramble_score INTEGER NOT NULL,\n"
                 + " taboo_score INTEGER NOT NULL,\n"
-                + " guess_score INTEGER NOT NULL"
+                + " guess_score INTEGER NOT NULL,\n"
+                + " casino_score INTEGER NOT NULL"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(DB_NAME);
@@ -84,7 +85,8 @@ public class Database {
 
     // com.bit.telebot.game methods
     private void createGameEntry(String username) {
-        String sql = "INSERT INTO " + TABLE_GAME + "(username,type_score,scramble_score,taboo_score,guess_score) VALUES(?, 0, 0, 0,0)";
+        String sql = "INSERT INTO " + TABLE_GAME +
+                "(username,type_score,scramble_score,taboo_score,guess_score,casino_score) VALUES(?,0,0,0,0,0)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -95,12 +97,12 @@ public class Database {
         }
     }
 
-    private void incrementScore(String username, String game_name) {
+    private void incrementScore(String username, String game_name, int val) {
         // try to update the type score for the username, if not successful it means that
         // that user is not in db, so add em with a 1 score for type
         createGameEntry(username);
         String sql = "UPDATE " + TABLE_GAME +
-                " SET " + game_name + " = " + game_name + " + 1" +
+                " SET " + game_name + " = " + game_name + " + " + val + " " +
                 " WHERE username = ?";
 
         try (Connection conn = this.connect();
@@ -113,19 +115,23 @@ public class Database {
     }
 
     public void incrementTypeScore(String username) {
-        incrementScore(username, "type_score");
+        incrementScore(username, "type_score", 1);
     }
 
     public void incrementScrambleScore(String username) {
-        incrementScore(username, "scramble_score");
+        incrementScore(username, "scramble_score", 1);
     }
 
     public void incrementTabooScore(String username) {
-        incrementScore(username, "taboo_score");
+        incrementScore(username, "taboo_score", 1);
     }
 
     public void incrementGuessScore(String username) {
-        incrementScore(username, "guess_score");
+        incrementScore(username, "guess_score", 1);
+    }
+
+    public void addToCasino(String username, int points) {
+        incrementScore(username, "casino_score", points);
     }
 
     private long getScore(String username, String game_name) {
@@ -164,8 +170,12 @@ public class Database {
         return getScore(username, "taboo_score");
     }
 
-    public long getGuessScore(String username){
+    public long getGuessScore(String username) {
         return getScore(username, "guess_score");
+    }
+
+    public long getCasinoScore(String username) {
+        return getScore(username, "casino_score");
     }
 
     // admin methods
@@ -214,7 +224,7 @@ public class Database {
         }
     }
 
-    public void addAdmin(String username){
+    public void addAdmin(String username) {
         String sql = "INSERT INTO " + TABLE_ADMIN + "(username,is_dev) VALUES(?, 0)";
 
         try (Connection conn = this.connect();
@@ -226,7 +236,7 @@ public class Database {
         }
     }
 
-    public void addDev(String username){
+    public void addDev(String username) {
         addAdmin(username);
 
         String sql = "UPDATE " + TABLE_ADMIN +
