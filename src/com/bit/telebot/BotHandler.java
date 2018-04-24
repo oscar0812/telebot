@@ -50,7 +50,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         }
                     }
 
-                    if(cmd.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())){
+                    if(cmd.equalsIgnoreCase("exit") && Database.getInstance().isDev(message_sender.getUserName())){
                         sendMessage("Shutting off...");
                         System.exit(0);
                     }
