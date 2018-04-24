@@ -49,8 +49,6 @@ public class GameHandler {
         String message_text_lower = message_text.toLowerCase();
         User message_sender = message.getFrom();
 
-        Casino.check(handler, message_text);
-
         // check here if games are on (not implemented yet)
 
         String username = message_sender.getUserName();
@@ -204,9 +202,7 @@ public class GameHandler {
         } else if (message_text_lower.equals("/scores")) {
             // trying to get scores
             Database d = Database.getInstance();
-            bot_say_this = message.getFrom().getUserName()+
-                    "\n_____________"+
-                    "\nType: " + d.getTypeScore(message_sender.getUserName())+
+            bot_say_this = "Type: " + d.getTypeScore(message_sender.getUserName())+
                     "\nScramble: " + d.getScrambleScore(message_sender.getUserName()) +
                     "\nTaboo: " + d.getTabooScore(message_sender.getUserName()) +
                     "\nGuess: " + d.getGuessScore(message_sender.getUserName());

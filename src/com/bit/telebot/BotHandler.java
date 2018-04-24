@@ -94,6 +94,7 @@ public class BotHandler extends TelegramLongPollingBot {
                     String start = rmsg.substring(0, index);
                     String end = rmsg.substring(index+1);
                     char mid = rmsg.charAt(index) == 'i'?'o':'O';
+                    //sendMessage();
                     sendMessage(start+mid+end);
                 } else if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ong")) {
                     int index = rmsg.toLowerCase().indexOf("ong");
@@ -117,14 +118,7 @@ public class BotHandler extends TelegramLongPollingBot {
     }
 
     public void sendMessage(String args) {
-        SendMessage sendMessageRequest = new SendMessage();
-        sendMessageRequest.setChatId(message.getChatId().toString());
-        sendMessageRequest.setText(args);
-        try {
-            execute(sendMessageRequest);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        sendMessage(args, message.getChatId());
     }
 
     public void sendMessage(String args, long chat_id) {
@@ -133,6 +127,19 @@ public class BotHandler extends TelegramLongPollingBot {
         sendMessageRequest.setText(args);
         try {
             execute(sendMessageRequest);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // sends a text message back to the group/person
+    public void sendReplyMessage(String message_text, Message msg) {
+        SendMessage message = new SendMessage() // Create a message object object
+                .setChatId(msg.getChat().getId())
+                .setText(message_text)
+                .setReplyToMessageId(msg.getMessageId());
+        try {
+            execute(message); // Sending our message object to user
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
