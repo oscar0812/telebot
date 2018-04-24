@@ -62,7 +62,7 @@ class ImageGuess{
 
     }
 
-    static ImageGuess random(){https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fatlanta-falcons-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fatlanta-falcons-logo%2F&docid=TZIeWf-i6zdGXM&tbnid=SLRhLbTF5-d7uM%3A&vet=10ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA..i&w=2400&h=2289&bih=575&biw=637&q=falcons%20logo&ved=0ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA&iact=mrc&uact=8
+    static ImageGuess random(){
         if(l.isEmpty())
             initList();
         return l.get(l.size()-1);
