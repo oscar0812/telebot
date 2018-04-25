@@ -10,27 +10,32 @@ import com.optimaize.langdetect.profiles.LanguageProfileReader;
 import com.optimaize.langdetect.text.CommonTextObjectFactories;
 import com.optimaize.langdetect.text.TextObject;
 import com.optimaize.langdetect.text.TextObjectFactory;
-import java.util.ArrayList;
+
+import java.util.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 public class LanguageDetection {
-    private String key,value;
+    private static String language;
+    private String key, value;
 
-    public LanguageDetection(String key, String value){
-    this.key = key;
-    this.value = value;
-}
+    public LanguageDetection(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
 
-    public String getKey() { return key; }
+    public String getKey() {
+        return key;
+    }
 
-    public String getValue() { return value; }
+    public String getValue() {
+        return value;
+    }
 
-    private static HashMap <String, String> lang = new HashMap();
+    private static LinkedHashMap<String, String> lang = new LinkedHashMap();
 
-    public static void initList(){
+    public static void initList() {
         lang.put("af", "Afrikaans");
         lang.put("an", "Aragonese");
         lang.put("ar", "Arabic");
@@ -39,7 +44,7 @@ public class LanguageDetection {
         lang.put("br", "Breton");
         lang.put("ca", "Catalan");
         lang.put("bg", "Bulgarian");
-        lang.put("bn","Bengali");
+        lang.put("bn", "Bengali");
         lang.put("cs", "Czech");
         lang.put("cy", "Welsh");
         lang.put("da", "Danish");
@@ -88,7 +93,7 @@ public class LanguageDetection {
         lang.put("so", "Somali");
         lang.put("sq", "Albanian");
         lang.put("sr", "Serbian");
-        lang.put("sv","Swedish");
+        lang.put("sv", "Swedish");
         lang.put("sw", "Swahili");
         lang.put("ta", "Tamil");
         lang.put("te", "Telugu");
@@ -102,9 +107,6 @@ public class LanguageDetection {
         lang.put("yi", "Yiddish");
         lang.put("zh-cn", "Simplified Chinese");
         lang.put("zh-tw", "Traditional Chinese");
-
-
-
 
 
     }
@@ -127,9 +129,17 @@ public class LanguageDetection {
 
 //query:
         TextObject textObject = textObjectFactory.forText(str);
-        Optional<LdLocale> lang = languageDetector.detect(textObject);
+        Optional<LdLocale> langs = languageDetector.detect(textObject);
+        language = langs.toString();
+        System.out.println(langs);
 
-        System.out.println(lang);
+
+    }
+
+    public static void main (String args []){
+
+        detect("Sinon je vais faire un peu de ménage");
+
     }
 
 }
