@@ -21,6 +21,7 @@ public class GameHandler {
         private boolean is_type = false;
         private boolean is_scramble = false;
         private boolean is_taboo = false;
+        private long type_start = 0;
 
         private ImageGuess guessGame = null;
     }
@@ -61,7 +62,11 @@ public class GameHandler {
             Database.getInstance().incrementTypeScore(username);
             current.is_type = false;
             current.current_type_word = "";
-            handler.sendMessage(username + " has won!", message.getChatId());
+
+            handler.sendMessage(username + " has won in " +
+                    (System.currentTimeMillis() - current.type_start) + " milliseconds!", message.getChatId());
+
+            current.type_start = 0;
         }
 
         // scramble game win
@@ -89,8 +94,8 @@ public class GameHandler {
             current.current_taboo_word = "";
             handler.sendMessage(username + " has won!", message.getChatId());
 
-        // guess game win
-        } else if(current != null && current.guessGame != null && message_text_lower.contains(current.guessGame.getAnswer())){
+            // guess game win
+        } else if (current != null && current.guessGame != null && message_text_lower.contains(current.guessGame.getAnswer())) {
             Database.getInstance().incrementGuessScore(username);
             current.guessGame = null;
             handler.sendMessage(username + " has won!", message.getChatId());
@@ -99,60 +104,45 @@ public class GameHandler {
         // check if trying to start a game
         String bot_say_this = "";
 
+        CurrentGame game = new CurrentGame();
+        if (!currentGames.containsKey(chat_id)) {
+            currentGames.put(chat_id, game);
+        }
+        game = currentGames.get(chat_id);
+
         switch (message_text_lower) {
             case "/type":
-
-                if (currentGames.containsKey(chat_id)) {
-                    CurrentGame game = currentGames.get(chat_id);
-                    if (game.current_type_word.isEmpty()) {
-                        game.current_type_word = dictionary.getRandomWord();
-                        game.is_type = true;
-                    }
-
-                    bot_say_this = "Type: " + currentGames.get(chat_id).current_type_word;
-                } else {
-                    CurrentGame game = new CurrentGame();
+                if (game.current_type_word.isEmpty()) {
                     game.current_type_word = dictionary.getRandomWord();
                     game.is_type = true;
-                    currentGames.put(chat_id, game);
-
-                    bot_say_this = "Type: " + game.current_type_word;
+                    game.type_start = System.currentTimeMillis();
                 }
+
+                bot_say_this = "Type: " + currentGames.get(chat_id).current_type_word;
 
                 break;
             case "/scramble":
-                if (currentGames.containsKey(chat_id)) {
-                    CurrentGame game = currentGames.get(chat_id);
-                    if (game.current_scramble_word.isEmpty()) {
-                        game.current_unscrambled_word = dictionary.getRandomWord();
-                        game.current_scramble_word = dictionary.scrambleWord(game.current_unscrambled_word);
-                        game.is_scramble = true;
-                    }
-
-                    bot_say_this = "Unscramble: " + game.current_scramble_word;
-                } else {
-                    CurrentGame game = new CurrentGame();
+                if (game.current_scramble_word.isEmpty()) {
                     game.current_unscrambled_word = dictionary.getRandomWord();
                     game.current_scramble_word = dictionary.scrambleWord(game.current_unscrambled_word);
                     game.is_scramble = true;
-                    currentGames.put(chat_id, game);
-
-                    bot_say_this = "Unscramble: " + game.current_scramble_word;
                 }
+
+                bot_say_this = "Unscramble: " + game.current_scramble_word;
+
                 break;
             case "/taboo":
                 if (!message.getChat().isUserChat()) {
-                    if (!currentGames.containsKey(chat_id)) {
-                        currentGames.put(chat_id, new CurrentGame());
-                    }
-                    CurrentGame game = currentGames.get(chat_id);
+
                     if (!game.current_taboo_word.isEmpty()) {
                         handler.sendMessage(game.player_username + " has the word.", chat_id);
                     } else {
                         game.current_taboo_word = dictionary.getRandomWord();
                         game.player_username = message_sender.getUserName();
                         game.is_taboo = true;
+                        // pm the person
                         handler.sendMessage("Word is " + game.current_taboo_word, message_sender.getId());
+                        // send notification to group
                         bot_say_this = ("Word sent to " + message_sender.getUserName());
                     }
                 } else {
@@ -160,23 +150,11 @@ public class GameHandler {
                 }
                 break;
             case "/guess":
-                if (currentGames.containsKey(chat_id)) {
-                    // guess was already started
-                    CurrentGame game = currentGames.get(chat_id);
-                    if (game.guessGame == null) {
-                        game.guessGame = ImageGuess.random();
-                    }
 
-                    handler.sendPhoto(game.guessGame.getUrl());
-                } else {
-                    // new guess
-                    CurrentGame game = new CurrentGame();
+                if (game.guessGame == null) {
                     game.guessGame = ImageGuess.random();
-                    currentGames.put(chat_id, game);
-
-                    // send image here
-                    handler.sendPhoto(game.guessGame.getUrl());
                 }
+                handler.sendPhoto(game.guessGame.getUrl());
                 break;
         }
 
@@ -206,7 +184,7 @@ public class GameHandler {
         } else if (message_text_lower.equals("/scores")) {
             // trying to get scores
             Database d = Database.getInstance();
-            handler.sendReplyMessage("Type: " + d.getTypeScore(message_sender.getUserName())+
+            handler.sendReplyMessage("Type: " + d.getTypeScore(message_sender.getUserName()) +
                     "\nScramble: " + d.getScrambleScore(message_sender.getUserName()) +
                     "\nTaboo: " + d.getTabooScore(message_sender.getUserName()) +
                     "\nGuess: " + d.getGuessScore(message_sender.getUserName()));
