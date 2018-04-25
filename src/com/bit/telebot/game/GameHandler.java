@@ -102,7 +102,6 @@ public class GameHandler {
         }
 
         // check if trying to start a game
-        String bot_say_this = "";
 
         CurrentGame game = new CurrentGame();
         if (!currentGames.containsKey(chat_id)) {
@@ -118,8 +117,7 @@ public class GameHandler {
                     game.type_start = System.currentTimeMillis();
                 }
 
-                bot_say_this = "Type: " + currentGames.get(chat_id).current_type_word;
-
+                handler.sendMessage("Type: " + game.current_type_word);
                 break;
             case "/scramble":
                 if (game.current_scramble_word.isEmpty()) {
@@ -128,8 +126,7 @@ public class GameHandler {
                     game.is_scramble = true;
                 }
 
-                bot_say_this = "Unscramble: " + game.current_scramble_word;
-
+                handler.sendMessage("Unscramble: " + game.current_scramble_word);
                 break;
             case "/taboo":
                 if (!message.getChat().isUserChat()) {
@@ -143,10 +140,10 @@ public class GameHandler {
                         // pm the person
                         handler.sendMessage("Word is " + game.current_taboo_word, message_sender.getId());
                         // send notification to group
-                        bot_say_this = ("Word sent to " + message_sender.getUserName());
+                        handler.sendMessage("Word sent to " + message_sender.getUserName());
                     }
                 } else {
-                    bot_say_this = "Taboo must be played in group chats.";
+                    handler.sendMessage("Taboo must be played in group chats.");
                 }
                 break;
             case "/guess":
@@ -170,14 +167,17 @@ public class GameHandler {
                 if (!current.current_taboo_word.isEmpty()) {
                     all += "Taboo answer: " + current.current_taboo_word + "\n\n";
                 }
+                if (current.guessGame != null) {
+                    all += "Guess answer: " + current.guessGame.getAnswer() + "\n\n";
+                }
 
                 if (!all.trim().isEmpty())
-                    bot_say_this = "Games cleared\n\n" + all.trim();
+                    handler.sendMessage("Games cleared\n\n" + all.trim());
                 else
-                    bot_say_this = "Nothing to reset.";
+                    handler.sendMessage("Nothing to reset.");
                 currentGames.remove(chat_id);
             } else {
-                bot_say_this = "Nothing to reset.";
+                handler.sendMessage("Nothing to reset.");
 
             }
 
@@ -190,8 +190,5 @@ public class GameHandler {
                     "\nGuess: " + d.getGuessScore(message_sender.getUserName()));
 
         }
-
-        if (!bot_say_this.isEmpty())
-            handler.sendMessage(bot_say_this);
     }
 }

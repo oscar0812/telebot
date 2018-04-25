@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3f619f4d-0848-4cf9-baf4-f093482a9b27" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/GameHandler.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -54,8 +55,8 @@
       <file leaf-file-name="GameHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="108" column="41" selection-start-line="108" selection-start-column="41" selection-end-line="108" selection-end-column="41" />
+            <state relative-caret-position="267">
+              <caret line="191" column="9" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,9 +91,11 @@
       <find>System.out</find>
       <find>guess_score</find>
       <find>casino_score</find>
+      <find>bot_say_this =</find>
     </findStrings>
     <replaceStrings>
       <replace>game</replace>
+      <replace>handler.sendMessage(</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -315,7 +318,7 @@
       <workItem from="1524591667181" duration="862000" />
       <workItem from="1524595275240" duration="1624000" />
       <workItem from="1524600760975" duration="3769000" />
-      <workItem from="1524665892114" duration="3413000" />
+      <workItem from="1524665892114" duration="3833000" />
     </task>
     <task id="LOCAL-00001" summary="sendReplyMessage method">
       <created>1524602689521</created>
@@ -328,7 +331,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35279000" />
+    <option name="totallyTimeSpent" value="35699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
@@ -804,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="108" column="41" selection-start-line="108" selection-start-column="41" selection-end-line="108" selection-end-column="41" />
+        <state relative-caret-position="267">
+          <caret line="191" column="9" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
