@@ -1,7 +1,10 @@
 package com.bit.telebot.game;
 
 import com.bit.telebot.BotHandler;
-import org.telegram.telegrambots.api.objects.Update;
+import com.bit.telebot.Database;
+import org.telegram.telegrambots.api.objects.Message;
+
+import java.util.Random;
 
 public class Casino {
     /*
@@ -13,12 +16,21 @@ public class Casino {
 
      */
 
-    public static void check(BotHandler handler, String input){
-        if(input.equalsIgnoreCase("/roll")) {
+    public static void check(BotHandler handler, Message message){
+        int coins;
+        if(message.getText().equalsIgnoreCase("/coins")){
+            handler.sendReplyMessage("You have "+Database.getInstance().getCasinoScore(message.getFrom().getUserName())+" coins");
+        }
+        else if(message.getText().equalsIgnoreCase("/roll")) {
+
             handler.sendMessage("rolling...");
-        } else if(input.equalsIgnoreCase("/spin")){
-            handler.sendMessage("spinning...");
-        } else if(input.startsWith("/give")){
+        } else if(message.getText().equalsIgnoreCase("/spin")){
+            // random from 0 to 100
+            coins = new Random().nextInt(100);
+            Database.getInstance().addToCasino(message.getFrom().getUserName(), coins);
+            handler.sendReplyMessage("Congrats! You got "+coins+" coins");
+
+        } else if(message.getText().startsWith("/give")){
             handler.sendMessage("giving...");
         }
     }

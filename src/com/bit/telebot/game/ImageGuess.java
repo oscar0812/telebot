@@ -81,8 +81,8 @@ class ImageGuess{
     static ImageGuess random(){
         if(l.isEmpty())
             initList();
-        return l.get(l.size()-1);
-        //return l.get(new Random().nextInt(l.size()));
+        //return l.get(l.size()-1);
+        return l.get(new Random().nextInt(l.size()));
     }
 }
 

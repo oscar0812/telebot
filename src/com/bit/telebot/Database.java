@@ -43,7 +43,7 @@ public class Database {
                 + " taboo_score INTEGER NOT NULL,\n"
                 + " guess_score INTEGER NOT NULL,\n"
                 + " casino_score INTEGER NOT NULL"
-                + ");";
+                + " );";
 
         try (Connection conn = DriverManager.getConnection(DB_NAME);
              Statement stmt = conn.createStatement()) {

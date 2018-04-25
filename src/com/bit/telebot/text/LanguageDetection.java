@@ -119,15 +119,15 @@ public class LanguageDetection {
             e.printStackTrace();
         }
 
-//build language detector:
+        //build language detector:
         LanguageDetector languageDetector = LanguageDetectorBuilder.create(NgramExtractors.standard())
                 .withProfiles(languageProfiles)
                 .build();
 
-//create a text object factory
+        //create a text object factory
         TextObjectFactory textObjectFactory = CommonTextObjectFactories.forDetectingOnLargeText();
 
-//query:
+        //query:
         TextObject textObject = textObjectFactory.forText(str);
         Optional<LdLocale> langs = languageDetector.detect(textObject);
         language = langs.toString();
@@ -136,7 +136,7 @@ public class LanguageDetection {
 
     }
 
-    public static void main (String args []){
+    public static void main(String args[]) {
 
         detect("Sinon je vais faire un peu de ménage");
 
