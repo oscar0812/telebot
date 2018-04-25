@@ -74,8 +74,6 @@ class ImageGuess{
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fda%2F4b%2Fb1%2Fda4bb1eaa26bcd05da4eede92e15b449.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F573294227537180755%2F&docid=B7-MV6oH_ULdrM&tbnid=yphcSCcoPRSN7M%3A&vet=10ahUKEwiSrf_ii9TaAhUyc98KHcV_ChEQMwjTASgAMAA..i&w=512&h=512&bih=592&biw=1242&q=dolphins%20logo&ved=0ahUKEwiSrf_ii9TaAhUyc98KHcV_ChEQMwjTASgAMAA&iact=mrc&uact=8", "dolphins"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fminnesota-vikings-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fminnesota-vikings-logo%2F&docid=x59TzrRJL1UOTM&tbnid=ld88_Z1PMJcF-M%3A&vet=10ahUKEwiDkqKljNTaAhUBMd8KHUb4DBMQMwivASgBMAE..i&w=2400&h=3000&bih=592&biw=1242&q=vikings%20logo&ved=0ahUKEwiDkqKljNTaAhUBMd8KHUb4DBMQMwivASgBMAE&iact=mrc&uact=8", "vikings"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F519GwdDFgGL._SL1000_.jpg&imgrefurl=https%3A%2F%2Fwww.amazon.com%2FNew-England-Patriots-Logo-Magnet%2Fdp%2FB000Q74DPA&docid=rqRAIog5PKRbGM&tbnid=4ILTA7iRhPgO6M%3A&vet=10ahUKEwiEgIf7jNTaAhXSUt8KHeDoD7UQMwjRASgBMAE..i&w=1000&h=1000&bih=592&biw=1242&q=patriots%20logo&ved=0ahUKEwiEgIf7jNTaAhXSUt8KHeDoD7UQMwjRASgBMAE&iact=mrc&uact=8", "patriots"));
-
-
     }
 
     static ImageGuess random(){

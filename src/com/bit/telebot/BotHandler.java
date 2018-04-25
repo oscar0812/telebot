@@ -31,13 +31,9 @@ public class BotHandler extends TelegramLongPollingBot {
                 username = message.getFrom().getUserName();
                 System.out.println(username + ":" + rmsg);
 
-
-                //sendPhoto("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F67636%2Frose-blue-flower-rose-blooms-67636.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26h%3D350&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fflower%2F&docid=5UbOpOqf9qM23M&tbnid=ZAXhvwKefKr6jM%3A&vet=10ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE..i&w=528&h=350&bih=620&biw=612&q=images&ved=0ahUKEwjNktOF7c3aAhUEvFkKHVwWA3YQMwivASgBMAE&iact=mrc&uact=8", "Now has captionk");
                 // COMMAND DOSEN'T TAKE ARGUMENT
                 if (rmsg.contains("/") && !rmsg.contains(" ")) {
-                    cmd = message.getText().split("/")[1];
-
-                    if (cmd.equalsIgnoreCase("echo")) {
+                    if (rmsg.equalsIgnoreCase("/echo")) {
                         COUNTER++;
                         if (COUNTER == 1) {
                             echo = true;
@@ -50,12 +46,10 @@ public class BotHandler extends TelegramLongPollingBot {
                         }
                     }
 
-                    if(cmd.equalsIgnoreCase("exit") && Database.getInstance().isDev(message_sender.getUserName())){
+                    if(rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())){
                         sendMessage("Shutting off...");
                         System.exit(0);
                     }
-
-
                 }
                 // COMMAND TAKES ARGUMENT
                 else if (rmsg.contains(" ") && rmsg.startsWith("/")) {
@@ -89,18 +83,14 @@ public class BotHandler extends TelegramLongPollingBot {
                 }
 
                 // ping pong ching chong support
-                if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ing")) {
-                    int index = rmsg.toLowerCase().lastIndexOf("ing");
+                if (!rmsg.startsWith("/") && (rmsg.toLowerCase().endsWith("ing") || rmsg.toLowerCase().endsWith("ong"))) {
+                    int index = rmsg.toLowerCase().lastIndexOf("ng")-1;
                     String start = rmsg.substring(0, index);
                     String end = rmsg.substring(index+1);
-                    char mid = rmsg.charAt(index) == 'i'?'o':'O';
+
+                    char mid = rmsg.charAt(index);
+                    mid = mid == 'i'?'o':mid == 'I'?'O': mid == 'o'?'i':'I';
                     //sendMessage();
-                    sendMessage(start+mid+end);
-                } else if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ong")) {
-                    int index = rmsg.toLowerCase().indexOf("ong");
-                    String start = rmsg.substring(0, index);
-                    String end = rmsg.substring(index+1);
-                    char mid = rmsg.charAt(index) == 'o'?'i':'I';
                     sendMessage(start+mid+end);
                 }
             }
