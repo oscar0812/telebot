@@ -133,13 +133,13 @@ public class BotHandler extends TelegramLongPollingBot {
     }
 
     // sends a text message back to the group/person
-    public void sendReplyMessage(String message_text, Message msg) {
-        SendMessage message = new SendMessage() // Create a message object object
-                .setChatId(msg.getChat().getId())
+    public void sendReplyMessage(String message_text) {
+        SendMessage msg = new SendMessage() // Create a message object object
+                .setChatId(message.getChat().getId())
                 .setText(message_text)
-                .setReplyToMessageId(msg.getMessageId());
+                .setReplyToMessageId(message.getMessageId());
         try {
-            execute(message); // Sending our message object to user
+            execute(msg); // Sending our message object to user
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
