@@ -5,13 +5,19 @@ import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
 import com.bit.telebot.game.GameHandler;
 import org.javia.arity.MathSolver;
+import org.telegram.telegrambots.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
+import org.telegram.telegrambots.api.objects.PhotoSize;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 public class BotHandler extends TelegramLongPollingBot {
     private String rmsg, arg, cmd, username;
@@ -50,6 +56,9 @@ public class BotHandler extends TelegramLongPollingBot {
                     if (rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())) {
                         sendMessage("Shutting off...");
                         System.exit(0);
+                    }
+                    if(rmsg.equalsIgnoreCase("/pfp")){
+                        sendPfp(message);
                     }
                 }
                 // COMMAND TAKES ARGUMENT
@@ -180,6 +189,22 @@ public class BotHandler extends TelegramLongPollingBot {
             sendPhoto(sendPhotoRequest);
         } catch (TelegramApiException e) {
             e.printStackTrace();
+        }
+    }
+
+    void sendPfp(Message message) {
+        try {
+            GetUserProfilePhotos pfp = new GetUserProfilePhotos();
+            pfp.setUserId(message.getFrom().getId());
+            pfp.setLimit(4);
+            pfp.setOffset(0);
+
+            List<PhotoSize> photos = execute(pfp).getPhotos().listIterator(0).next();
+
+            String f_id = Objects.requireNonNull(photos.stream().max(Comparator.comparing(PhotoSize::getFileSize)).orElse(null)).getFileId();
+            sendPhoto(f_id);
+        } catch (Exception e) {
+            sendReplyMessage("No pfp");
         }
     }
 }

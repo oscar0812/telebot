@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f619f4d-0848-4cf9-baf4-f093482a9b27" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/BotHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/BotHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/StringUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/StringUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/Casino.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/GameHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/GameHandler$CurrentGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/GameHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/text/Lyrics$LyricsResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/text/Lyrics$LyricsResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/text/Lyrics.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/text/Lyrics.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/StringUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/text/Lyrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/text/Lyrics.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,8 +77,8 @@
       <file leaf-file-name="BotHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
+            <state relative-caret-position="132">
+              <caret line="190" column="17" selection-start-line="190" selection-start-column="17" selection-end-line="190" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4608#4609#0" expanded="true" />
@@ -345,7 +334,7 @@
       <workItem from="1524591667181" duration="862000" />
       <workItem from="1524595275240" duration="1624000" />
       <workItem from="1524600760975" duration="3769000" />
-      <workItem from="1524665892114" duration="6830000" />
+      <workItem from="1524665892114" duration="6952000" />
     </task>
     <task id="LOCAL-00001" summary="sendReplyMessage method">
       <created>1524602689521</created>
@@ -358,7 +347,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38696000" />
+    <option name="totallyTimeSpent" value="38818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
@@ -879,8 +868,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
+        <state relative-caret-position="132">
+          <caret line="190" column="17" selection-start-line="190" selection-start-column="17" selection-end-line="190" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4608#4609#0" expanded="true" />
