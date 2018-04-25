@@ -51,4 +51,40 @@ public class StringUtil {
             return "";
         }
     }
+
+    public static String[] splitString(String str, int maxChars) {
+        int rows = (str.length() / maxChars) + 1;
+        String[] arr = new String[str.length()];
+        if (rows == 1) {
+            return (new String[]{str});
+        } else {
+            int x = 0;
+            while (!str.trim().isEmpty()) {
+                if (str.trim().length() <= maxChars) {
+                    arr[x++] = str;
+                    str = "";
+                } else {
+                    String current = str.substring(0, maxChars);
+                    if (str.charAt(maxChars) == ' ') {
+                        str = str.substring(maxChars);
+                    } else {
+                        int space_ind = current.lastIndexOf(' ');
+                        if (space_ind > 0) {
+                            current = str.substring(0, space_ind);
+                            str = str.substring(space_ind);
+                        }
+                    }
+                    arr[x++] = current;
+                }
+            }
+
+            String[] temp = new String[x];
+            for (int y = 0; y < temp.length; y++) {
+                temp[y] = arr[y].trim();
+            }
+
+            arr = temp;
+        }
+        return arr;
+    }
 }

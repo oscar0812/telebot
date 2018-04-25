@@ -1,5 +1,6 @@
 package com.bit.telebot;
 
+import com.bit.telebot.text.Lyrics;
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
 import com.bit.telebot.game.GameHandler;
@@ -46,7 +47,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         }
                     }
 
-                    if(rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())){
+                    if (rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())) {
                         sendMessage("Shutting off...");
                         System.exit(0);
                     }
@@ -70,11 +71,25 @@ public class BotHandler extends TelegramLongPollingBot {
                     } else if (cmd.equalsIgnoreCase("/math")) {
                         sendMessage(MathSolver.solve(arg));
 
-                    } else if(!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
-                            && Database.getInstance().isDev(message_sender.getUserName())){
+                    } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
+                            && Database.getInstance().isDev(message_sender.getUserName())) {
 
                         Database.getInstance().addAdmin(arg);
-                        sendMessage("Added admin "+arg);
+                        sendMessage("Added admin " + arg);
+                    } else if (cmd.equalsIgnoreCase("/lyrics") && arg.contains("_")) {
+                        String artist = arg.substring(0, arg.indexOf("_"));
+                        String song = arg.substring(arg.indexOf("_") + 1);
+                        try {
+                            String lyrics = Lyrics.getSongLyrics(artist, song).lyrics;
+                            if (lyrics.length() > Constants.MAX_MESSAGE_INT) {
+                                sendReplyMessage("Message too long, sending to pm");
+                                sendSplitMessage(lyrics, message_sender.getId());
+                            } else {
+                                sendMessage(lyrics);
+                            }
+                        } catch (Exception e) {
+                            sendReplyMessage("No lyrics found");
+                        }
                     }
 
                 }
@@ -84,14 +99,14 @@ public class BotHandler extends TelegramLongPollingBot {
 
                 // ping pong ching chong support
                 if (!rmsg.startsWith("/") && (rmsg.toLowerCase().endsWith("ing") || rmsg.toLowerCase().endsWith("ong"))) {
-                    int index = rmsg.toLowerCase().lastIndexOf("ng")-1;
+                    int index = rmsg.toLowerCase().lastIndexOf("ng") - 1;
                     String start = rmsg.substring(0, index);
-                    String end = rmsg.substring(index+1);
+                    String end = rmsg.substring(index + 1);
 
                     char mid = rmsg.charAt(index);
-                    mid = mid == 'i'?'o':mid == 'I'?'O': mid == 'o'?'i':'I';
+                    mid = mid == 'i' ? 'o' : mid == 'I' ? 'O' : mid == 'o' ? 'i' : 'I';
                     //sendMessage();
-                    sendMessage(start+mid+end);
+                    sendMessage(start + mid + end);
                 }
             }
         }
@@ -122,7 +137,15 @@ public class BotHandler extends TelegramLongPollingBot {
         }
     }
 
-    // sends a text message back to the group/person
+    // if the message is too long, split it uses high tech algorithm, and send separate message
+    public void sendSplitMessage(String message_text, long chat_id) {
+        String[] strings = StringUtil.splitString(message_text, Constants.MAX_MESSAGE_INT);
+
+        for (String string : strings) {
+            sendMessage(string, chat_id);
+        }
+    }
+
     public void sendReplyMessage(String message_text) {
         SendMessage msg = new SendMessage() // Create a message object object
                 .setChatId(message.getChat().getId())

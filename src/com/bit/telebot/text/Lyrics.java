@@ -36,8 +36,12 @@ public class Lyrics {
     }
 
     public static class LyricsResponse {
-        String lyrics;
-        String artist;
-        String title;
+        public String lyrics;
+        public String artist;
+        public String title;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(Lyrics.getSongLyrics("Eminem", "Superman").lyrics);
     }
 }
