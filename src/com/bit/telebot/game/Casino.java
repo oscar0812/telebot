@@ -15,7 +15,6 @@ public class Casino {
     /give user amount
 
      */
-
     public static void check(BotHandler handler, Message message){
         int coins;
         if(message.getText().equalsIgnoreCase("/coins")){
@@ -24,6 +23,8 @@ public class Casino {
         else if(message.getText().equalsIgnoreCase("/roll")) {
 
             handler.sendMessage("rolling...");
+            handler.sendMessage("LANDED ON 6");
+            handler.sendMessage(message.getFrom().getUserName()+ " has won 1,000,000 coins!");
         } else if(message.getText().equalsIgnoreCase("/spin")){
             // random from 0 to 100
             coins = new Random().nextInt(100);

@@ -1,5 +1,6 @@
 package com.bit.telebot;
 
+import com.bit.telebot.text.LanguageDetection;
 import com.bit.telebot.text.Lyrics;
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
@@ -24,7 +25,6 @@ public class BotHandler extends TelegramLongPollingBot {
     private Message message;
     private boolean echo = false;
     static int COUNTER;
-
     @Override
     public void onUpdateReceived(Update update) {
 
@@ -80,6 +80,11 @@ public class BotHandler extends TelegramLongPollingBot {
                     } else if (cmd.equalsIgnoreCase("/math")) {
                         sendMessage(MathSolver.solve(arg));
 
+                    } else if (cmd.equalsIgnoreCase("/ask")){
+                        sendMessage(EightBall.response());
+                    } else if(cmd.equalsIgnoreCase("/detect")){
+                        String lang = LanguageDetection.detect(arg);
+                        sendMessage("Language Detected: " + lang);
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
                             && Database.getInstance().isDev(message_sender.getUserName())) {
 
@@ -107,7 +112,7 @@ public class BotHandler extends TelegramLongPollingBot {
                 }
 
                 // ping pong ching chong support
-                if (!rmsg.startsWith("/") && (rmsg.toLowerCase().endsWith("ing") || rmsg.toLowerCase().endsWith("ong"))) {
+                if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ing") || rmsg.toLowerCase().endsWith("ong")) {
                     int index = rmsg.toLowerCase().lastIndexOf("ng") - 1;
                     String start = rmsg.substring(0, index);
                     String end = rmsg.substring(index + 1);
@@ -116,6 +121,12 @@ public class BotHandler extends TelegramLongPollingBot {
                     mid = mid == 'i' ? 'o' : mid == 'I' ? 'O' : mid == 'o' ? 'i' : 'I';
                     //sendMessage();
                     sendMessage(start + mid + end);
+                } else if (rmsg.contains("no u")){
+                    sendMessage("no " + rmsg);
+
+                }else if (rmsg.contains("^")){
+                    sendMessage("^" + rmsg);
+
                 }
             }
         }

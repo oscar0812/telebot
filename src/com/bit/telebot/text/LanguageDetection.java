@@ -18,22 +18,8 @@ import java.util.ArrayList;
 
 public class LanguageDetection {
     private static String language;
-    private String key, value;
 
-    public LanguageDetection(String key, String value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    private static LinkedHashMap<String, String> lang = new LinkedHashMap();
+    private static HashMap<String, String> lang = new HashMap();
 
     public static void initList() {
         lang.put("af", "Afrikaans");
@@ -111,7 +97,8 @@ public class LanguageDetection {
 
     }
 
-    public static void detect(String str) {
+    public static String detect(String str) {
+        initList();
         List<LanguageProfile> languageProfiles = null;
         try {
             languageProfiles = new LanguageProfileReader().readAllBuiltIn();
@@ -130,16 +117,15 @@ public class LanguageDetection {
         //query:
         TextObject textObject = textObjectFactory.forText(str);
         Optional<LdLocale> langs = languageDetector.detect(textObject);
-        language = langs.toString();
-        System.out.println(langs);
+        
+        language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
 
+        //System.out.println(lang.get(language));
 
-    }
-
-    public static void main(String args[]) {
-
-        detect("Sinon je vais faire un peu de ménage");
+        return lang.get(language);
 
     }
+
+
 
 }
