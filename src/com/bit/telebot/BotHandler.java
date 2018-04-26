@@ -25,6 +25,7 @@ public class BotHandler extends TelegramLongPollingBot {
     private Message message;
     private boolean echo = false;
     static int COUNTER;
+
     @Override
     public void onUpdateReceived(Update update) {
 
@@ -57,7 +58,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage("Shutting off...");
                         System.exit(0);
                     }
-                    if(rmsg.equalsIgnoreCase("/pfp")){
+                    if (rmsg.equalsIgnoreCase("/pfp")) {
                         sendPfp(message);
                     }
                 }
@@ -80,9 +81,7 @@ public class BotHandler extends TelegramLongPollingBot {
                     } else if (cmd.equalsIgnoreCase("/math")) {
                         sendMessage(MathSolver.solve(arg));
 
-                    } else if (cmd.equalsIgnoreCase("/ask")){
-                        sendMessage(EightBall.response());
-                    } else if(cmd.equalsIgnoreCase("/detect")){
+                    } else if (cmd.equalsIgnoreCase("/detect")) {
                         String lang = LanguageDetection.detect(arg);
                         sendMessage("Language Detected: " + lang);
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
@@ -121,10 +120,10 @@ public class BotHandler extends TelegramLongPollingBot {
                     mid = mid == 'i' ? 'o' : mid == 'I' ? 'O' : mid == 'o' ? 'i' : 'I';
                     //sendMessage();
                     sendMessage(start + mid + end);
-                } else if (rmsg.contains("no u")){
+                } else if (rmsg.contains("no u")) {
                     sendMessage("no " + rmsg);
 
-                }else if (rmsg.contains("^")){
+                } else if (rmsg.contains("^")) {
                     sendMessage("^" + rmsg);
 
                 }
