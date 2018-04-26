@@ -1,7 +1,5 @@
 package com.bit.telebot.game;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Random;
 
