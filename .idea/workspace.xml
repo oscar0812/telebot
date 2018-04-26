@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f619f4d-0848-4cf9-baf4-f093482a9b27" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/EightBall.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,8 +77,8 @@
       <file leaf-file-name="BotHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="219" column="1" selection-start-line="219" selection-start-column="1" selection-end-line="219" selection-end-column="1" />
+            <state relative-caret-position="259">
+              <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -332,7 +329,7 @@
       <workItem from="1524595275240" duration="1624000" />
       <workItem from="1524600760975" duration="3769000" />
       <workItem from="1524665892114" duration="7356000" />
-      <workItem from="1524704701342" duration="649000" />
+      <workItem from="1524704701342" duration="942000" />
     </task>
     <task id="LOCAL-00001" summary="sendReplyMessage method">
       <created>1524602689521</created>
@@ -345,7 +342,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39871000" />
+    <option name="totallyTimeSpent" value="40164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
@@ -854,8 +851,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="219" column="1" selection-start-line="219" selection-start-column="1" selection-end-line="219" selection-end-column="1" />
+        <state relative-caret-position="259">
+          <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

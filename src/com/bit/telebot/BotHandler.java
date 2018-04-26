@@ -120,12 +120,21 @@ public class BotHandler extends TelegramLongPollingBot {
                     mid = mid == 'i' ? 'o' : mid == 'I' ? 'O' : mid == 'o' ? 'i' : 'I';
                     //sendMessage();
                     sendMessage(start + mid + end);
-                } else if (rmsg.contains("no u")) {
-                    sendMessage("no " + rmsg);
 
-                } else if (rmsg.contains("^")) {
-                    sendMessage("^" + rmsg);
-
+                } else if ((rmsg.toLowerCase().startsWith("no ") && rmsg.toLowerCase().endsWith(" u"))
+                        || rmsg.toLowerCase().equals("u")) {
+                    // message: no u
+                    // reply: no no u
+                    String scrapedText = rmsg.toLowerCase().replaceAll("\\s+", " ");
+                    scrapedText = scrapedText.replaceAll("no ", "");
+                    if (scrapedText.equals("u")) {
+                        sendMessage(rmsg.toLowerCase().replace("u", " no u").
+                                replaceAll("\\s+", " "));
+                    }
+                } else if (rmsg.matches("(.)\\1+") && !rmsg.isEmpty() && rmsg.startsWith("^")) {
+                    // check if string is only made up of one char, if it is
+                    // replay with a longer string of the same char
+                    sendMessage(rmsg + "" + rmsg.charAt(0));
                 }
             }
         }
