@@ -12,5 +12,6 @@
     <orderEntry type="library" name="UrbanDictionary" level="project" />
     <orderEntry type="library" name="MathSolver" level="project" />
     <orderEntry type="library" name="language-detector" level="project" />
+    <orderEntry type="library" name="org.json:json:20180130" level="project" />
   </component>
 </module>

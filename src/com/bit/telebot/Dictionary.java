@@ -464,7 +464,7 @@ public class Dictionary {
         word_list.add("ago");
         word_list.add("ran");
         word_list.add("check");
-        word_list.add("com/bit/telebot/game");
+        word_list.add("game");
         word_list.add("shape");
         word_list.add("equate");
         word_list.add("hot");

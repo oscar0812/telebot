@@ -1,12 +1,15 @@
 package com.bit.telebot.game;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-class ImageGuess{
+class ImageGuess {
     private String url;
     private String answer;
-    public ImageGuess(String url, String answer){
+
+    public ImageGuess(String url, String answer) {
         this.url = url;
         this.answer = answer;
     }
@@ -18,9 +21,10 @@ class ImageGuess{
     public String getAnswer() {
         return answer;
     }
+
     private static ArrayList<ImageGuess> l = new ArrayList<>();
 
-    private static void initList(){
+    private static void initList() {
 
         l.add(new ImageGuess("https://images.pexels.com/photos/247376/pexels-photo-247376.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "zebra"));
         l.add(new ImageGuess("https://images.pexels.com/photos/236636/pexels-photo-236636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "horse"));
@@ -45,26 +49,41 @@ class ImageGuess{
 
         l.add(new ImageGuess("https://images.pexels.com/photos/955193/pexels-photo-955193.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "book"));
         l.add(new ImageGuess("https://images.pexels.com/photos/978819/pexels-photo-978819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "cat"));
+
         //Pokemon
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2F979%2Fpikachu-birthday-event-pokemon.jpg&imgrefurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2Fen%2Fbirthday-events%2F111-pikachu-birthday-event-pokemon.html&docid=xu9Rh4WdpaG2VM&tbnid=R3gdwER6OYsmSM%3A&vet=10ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI..i&w=1000&h=1000&bih=620&biw=612&q=Pikachu&ved=0ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI&iact=mrc&uact=8","pikachu"));
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F0%2F00%2F359Absol.png%2F250px-359Absol.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FAbsol_(Pok%25C3%25A9mon)&docid=3x4zECFPqJ5k3M&tbnid=q9qQMYxf0oJkNM%3A&vet=10ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA..i&w=250&h=250&bih=620&biw=612&q=Absol&ved=0ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA&iact=mrc&uact=8","absol"));
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F9%2F9b%2F778Mimikyu.png%2F1200px-778Mimikyu.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FMimikyu_(Pok%25C3%25A9mon)&docid=qZAvA9xEjZfWQM&tbnid=f4g2qCG_O6tSNM%3A&vet=10ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA..i&w=1200&h=1200&bih=636&biw=1242&q=Mimikyu&ved=0ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA&iact=mrc&uact=8","mimikyu"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2F979%2Fpikachu-birthday-event-pokemon.jpg&imgrefurl=http%3A%2F%2Fwww.pokemonget.eu%2Fshop%2Fen%2Fbirthday-events%2F111-pikachu-birthday-event-pokemon.html&docid=xu9Rh4WdpaG2VM&tbnid=R3gdwER6OYsmSM%3A&vet=10ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI..i&w=1000&h=1000&bih=620&biw=612&q=Pikachu&ved=0ahUKEwiuotPgvdHaAhWvVt8KHfLMABcQMwjLASgCMAI&iact=mrc&uact=8", "pikachu"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F0%2F00%2F359Absol.png%2F250px-359Absol.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FAbsol_(Pok%25C3%25A9mon)&docid=3x4zECFPqJ5k3M&tbnid=q9qQMYxf0oJkNM%3A&vet=10ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA..i&w=250&h=250&bih=620&biw=612&q=Absol&ved=0ahUKEwjhzZPTvtHaAhXRV98KHSFWAC8QMwjMASgAMAA&iact=mrc&uact=8", "absol"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.bulbagarden.net%2Fupload%2Fthumb%2F9%2F9b%2F778Mimikyu.png%2F1200px-778Mimikyu.png&imgrefurl=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fwiki%2FMimikyu_(Pok%25C3%25A9mon)&docid=qZAvA9xEjZfWQM&tbnid=f4g2qCG_O6tSNM%3A&vet=10ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA..i&w=1200&h=1200&bih=636&biw=1242&q=Mimikyu&ved=0ahUKEwivoYi-v9HaAhUCr1kKHSZsDZIQMwg5KAAwAA&iact=mrc&uact=8", "mimikyu"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/FRVBO7HFH2UH89NG-cp0x69x1920x1030-fill810x415x", "pikachu"));
+        l.add(new ImageGuess("http://digitalspyuk.cdnds.net/16/42/980x490/landscape-1476782611-raichu-silhouette.jpg", "raichu"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/HIKJM5J2E477AHPT-cp46x0x1712x1076-pad810x389xxGYTRx.img", "eevee"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/SC0S3LVTM1LKDK2G-cp0x45x1024x706-pad810x389xxGYTRx.img", "haunter"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/2H4H8DSV54POL4N9-cp0x54x1024x715-pad810x389xxGYTRx.img", "geodude"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/R1TMJ67P8I99QPMT-cp0x32x480x342-pad810x389xxGYTRx.img", "diglett"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/0SCT6CDPNAJJ1EFI-cp0x105x1024x765-pad810x389xxGYTRx.img", "snorlax"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/CV52G367VK592DAD-cp0x65x1024x726-pad810x389xxGYTRx.img", "growlithe"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/5OR0F4K35E37KUS4-cp2x98x973x725-pad810x389xxGYTRx.img", "primape"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/7JRE10KJB387UG28-cp0x54x1024x715-pad810x389xxGYTRx.img", "pinsir"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/3HJG9J9VQ70H6ADB-cp0x62x667x494-pad810x389xxGYTRx.img", "ninetales"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/FJD16AV8GB1C3N4E-cp0x70x1021x729-pad810x389xxGYTRx.img", "chansey"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/LI1NEKI91U22ULSU-cp0x105x1023x765-pad810x389xxGYTRx.img", "ditto"));
+        l.add(new ImageGuess("https://proxy.topixcdn.com/ipicimg/5T3KA5LAF04AL44U-cp0x80x1021x740-pad810x389xxGYTRx.img", "dragonite"));
 
         l.add(new ImageGuess("https://logorealm.com/nike-logo/", "nike"));
 
         //sport teams
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Farizona-cardinals-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Farizona-cardinals-logo%2F&docid=FcIQuol-ALKNtM&tbnid=nv0Mk64m21fmHM%3A&vet=10ahUKEwjGkLDHuNPaAhUKPN8KHc3sDzwQMwjRASgBMAE..i&w=2400&h=1981&bih=575&biw=637&q=cardinals%20logo&ved=0ahUKEwjGkLDHuNPaAhUKPN8KHc3sDzwQMwjRASgBMAE&iact=mrc&uact=8", "cardinals"));
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fatlanta-falcons-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fatlanta-falcons-logo%2F&docid=TZIeWf-i6zdGXM&tbnid=SLRhLbTF5-d7uM%3A&vet=10ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA..i&w=2400&h=2289&bih=575&biw=637&q=falcons%20logo&ved=0ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA&iact=mrc&uact=8","falcons"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fatlanta-falcons-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fatlanta-falcons-logo%2F&docid=TZIeWf-i6zdGXM&tbnid=SLRhLbTF5-d7uM%3A&vet=10ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA..i&w=2400&h=2289&bih=575&biw=637&q=falcons%20logo&ved=0ahUKEwj1x_jpuNPaAhUPVd8KHYO6C8UQMwisASgAMAA&iact=mrc&uact=8", "falcons"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fbaltimore-ravens-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fbaltimore-ravens-logo%2F&docid=SHxjqa0GUhXVxM&tbnid=G5FT505s9DrzIM%3A&vet=10ahUKEwjc5p20udPaAhXvmuAKHXNRCNcQMwiBAigAMAA..i&w=2400&h=1480&bih=575&biw=637&q=ravens%20logo&ved=0ahUKEwjc5p20udPaAhXvmuAKHXNRCNcQMwiBAigAMAA&iact=mrc&uact=8", "ravens"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fbuffalo-bills-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fbuffalo-bills-logo%2F&docid=yDIKHl5RRffYiM&tbnid=Ut3lghJVtL4QtM%3A&vet=10ahUKEwi4o7mJutPaAhXKm-AKHUueA9kQMwjFASgAMAA..i&w=2400&h=1700&bih=575&biw=637&q=bills%20logo&ved=0ahUKEwi4o7mJutPaAhXKm-AKHUueA9kQMwjFASgAMAA&iact=mrc&uact=8", "bills"));
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FMK16FBfuQxk%2Fmaxresdefault.jpg&imgrefurl=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DMK16FBfuQxk&docid=N7-jngDjuF8tnM&tbnid=YfEonzTWzTuxgM%3A&vet=10ahUKEwjr2amrutPaAhUxhOAKHQKhC3YQMwiqASgAMAA..i&w=1280&h=720&bih=575&biw=637&q=panthers%20logo&ved=0ahUKEwjr2amrutPaAhUxhOAKHQKhC3YQMwiqASgAMAA&iact=mrc&uact=8","panthers"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FMK16FBfuQxk%2Fmaxresdefault.jpg&imgrefurl=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DMK16FBfuQxk&docid=N7-jngDjuF8tnM&tbnid=YfEonzTWzTuxgM%3A&vet=10ahUKEwjr2amrutPaAhUxhOAKHQKhC3YQMwiqASgAMAA..i&w=1280&h=720&bih=575&biw=637&q=panthers%20logo&ved=0ahUKEwjr2amrutPaAhUxhOAKHQKhC3YQMwiqASgAMAA&iact=mrc&uact=8", "panthers"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F5%2F5c%2FChicago_Bears_logo.svg%2F2000px-Chicago_Bears_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AChicago_Bears_logo.svg&docid=hYll5to0COIzuM&tbnid=JkSoKqmsogiEyM%3A&vet=10ahUKEwiTv5mZvNPaAhXJneAKHUZQDlEQMwi7ASgBMAE..i&w=2000&h=1337&bih=575&biw=637&q=bears%20logo&ved=0ahUKEwiTv5mZvNPaAhXJneAKHUZQDlEQMwi7ASgBMAE&iact=mrc&uact=8", "bears"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F8%2F81%2FCincinnati_Bengals_logo.svg%2F2000px-Cincinnati_Bengals_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ACincinnati_Bengals_logo.svg&docid=-JQvfbu7a0UGFM&tbnid=AuK3MGJb1rsAMM%3A&vet=10ahUKEwjFkOiiwNPaAhVGn-AKHcPvDXYQMwi_ASgAMAA..i&w=2000&h=1404&bih=575&biw=637&q=benfalslogo&ved=0ahUKEwjFkOiiwNPaAhVGn-AKHcPvDXYQMwi_ASgAMAA&iact=mrc&uact=8", "bengals"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fusatftw.files.wordpress.com%2F2015%2F02%2Fhelmet_top_center1.png%3Fw%3D1000&imgrefurl=https%3A%2F%2Fftw.usatoday.com%2F2015%2F02%2Fcleveland-browns-new-logo&docid=1TSRYc7Xsh85nM&tbnid=WvfM3bCJk7i0GM%3A&vet=10ahUKEwj9uZ7twNPaAhXnmOAKHfhfD0sQMwibASgAMAA..i&w=660&h=509&bih=575&biw=637&q=browns%20logo&ved=0ahUKEwj9uZ7twNPaAhXnmOAKHfhfD0sQMwibASgAMAA&iact=mrc&uact=8", "browns"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F9b%2Fd7%2F4f%2F9bd74fc0e9547d6da161c2c9c6e485e3.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F212584044888909413%2F&docid=rxlOfcoX_r7UzM&tbnid=w4-n73_PbQ93oM%3A&vet=10ahUKEwjW-8mm1dPaAhVNm-AKHZ9hDXAQMwjlASgAMAA..i&w=605&h=570&bih=575&biw=637&q=cowboys%20logo&ved=0ahUKEwjW-8mm1dPaAhVNm-AKHZ9hDXAQMwjlASgAMAA&iact=mrc&uact=8", "cowboys"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fdenver-broncos-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fdenver-broncos-logo%2F&docid=Oa5F0ch_e2zObM&tbnid=lhncnp8c0E8E1M%3A&vet=10ahUKEwiKiLb91dPaAhXSTd8KHavCB1AQMwifAigAMAA..i&w=2400&h=1600&bih=575&biw=637&q=brroncos%20logo&ved=0ahUKEwiKiLb91dPaAhXSTd8KHavCB1AQMwifAigAMAA&iact=mrc&uact=8", "broncos"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fdetroit-lions-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fdetroit-lions-logo%2F&docid=KWumKeKelaL5fM&tbnid=EkHd9sy6zqXMqM%3A&vet=10ahUKEwjcoOnC19PaAhUDMt8KHSzgDRIQMwjgASgBMAE..i&w=2400&h=2000&bih=575&biw=637&q=lions%20logo&ved=0ahUKEwjcoOnC19PaAhUDMt8KHSzgDRIQMwjgASgBMAE&iact=mrc&uact=8", "lions"));
-        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F5%2F50%2FGreen_Bay_Packers_logo.svg%2F2000px-Green_Bay_Packers_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AGreen_Bay_Packers_logo.svg&docid=J5Rlw8JVWu7b7M&tbnid=rdLUmuuv75h8fM%3A&vet=10ahUKEwj28deSiNTaAhXvTN8KHZCpDUEQMwjkASgAMAA..i&w=2000&h=1318&bih=592&biw=1242&q=packers%20logo&ved=0ahUKEwj28deSiNTaAhXvTN8KHZCpDUEQMwjkASgAMAA&iact=mrc&uact=8","packers"));
+        l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F5%2F50%2FGreen_Bay_Packers_logo.svg%2F2000px-Green_Bay_Packers_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AGreen_Bay_Packers_logo.svg&docid=J5Rlw8JVWu7b7M&tbnid=rdLUmuuv75h8fM%3A&vet=10ahUKEwj28deSiNTaAhXvTN8KHZCpDUEQMwjkASgAMAA..i&w=2000&h=1318&bih=592&biw=1242&q=packers%20logo&ved=0ahUKEwj28deSiNTaAhXvTN8KHZCpDUEQMwjkASgAMAA&iact=mrc&uact=8", "packers"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F580b585b2edbce24c47b2b29.png&imgrefurl=http%3A%2F%2Fwww.stickpng.com%2Fimg%2Fsports%2Fnfl-football%2Fhouston-texans%2Fhouston-texans-logo&docid=KV5IA20jaEllNM&tbnid=_SYfCPn3kp2IRM%3A&vet=10ahUKEwiziuOBidTaAhWwY98KHZV2BwwQMwj0ASgAMAA..i&w=657&h=600&bih=592&biw=1242&q=texans%20logo&ved=0ahUKEwiziuOBidTaAhWwY98KHZV2BwwQMwj0ASgAMAA&iact=mrc&uact=8", "texans"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F0%2F00%2FIndianapolis_Colts_logo.svg%2F2000px-Indianapolis_Colts_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AIndianapolis_Colts_logo.svg&docid=RoW_jhNhpuhNgM&tbnid=ev9xkGGoSkohjM%3A&vet=10ahUKEwj215znidTaAhUvUt8KHdyIAN0QMwiKAigAMAA..i&w=2000&h=2104&bih=592&biw=1242&q=colts%20logo&ved=0ahUKEwj215znidTaAhUvUt8KHdyIAN0QMwiKAigAMAA&iact=mrc&uact=8", "colts"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fjacksonville-jaguars-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fjacksonville-jaguars-logo%2F&docid=5isOfVFYl_gv9M&tbnid=hFP4ie-ZguEQoM%3A&vet=10ahUKEwiJup2eitTaAhUMd98KHeHkChQQMwiOAigAMAA..i&w=2400&h=1900&bih=592&biw=1242&q=logo%20jaguars&ved=0ahUKEwiJup2eitTaAhUMd98KHeHkChQQMwiOAigAMAA&iact=mrc&uact=8", "jaguars"));
@@ -74,10 +93,34 @@ class ImageGuess{
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fda%2F4b%2Fb1%2Fda4bb1eaa26bcd05da4eede92e15b449.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F573294227537180755%2F&docid=B7-MV6oH_ULdrM&tbnid=yphcSCcoPRSN7M%3A&vet=10ahUKEwiSrf_ii9TaAhUyc98KHcV_ChEQMwjTASgAMAA..i&w=512&h=512&bih=592&biw=1242&q=dolphins%20logo&ved=0ahUKEwiSrf_ii9TaAhUyc98KHcV_ChEQMwjTASgAMAA&iact=mrc&uact=8", "dolphins"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.amazonaws.com%2Ffreebiesupply%2Flarge%2F2x%2Fminnesota-vikings-logo-transparent.png&imgrefurl=https%3A%2F%2Ffreebiesupply.com%2Flogos%2Fminnesota-vikings-logo%2F&docid=x59TzrRJL1UOTM&tbnid=ld88_Z1PMJcF-M%3A&vet=10ahUKEwiDkqKljNTaAhUBMd8KHUb4DBMQMwivASgBMAE..i&w=2400&h=3000&bih=592&biw=1242&q=vikings%20logo&ved=0ahUKEwiDkqKljNTaAhUBMd8KHUb4DBMQMwivASgBMAE&iact=mrc&uact=8", "vikings"));
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F519GwdDFgGL._SL1000_.jpg&imgrefurl=https%3A%2F%2Fwww.amazon.com%2FNew-England-Patriots-Logo-Magnet%2Fdp%2FB000Q74DPA&docid=rqRAIog5PKRbGM&tbnid=4ILTA7iRhPgO6M%3A&vet=10ahUKEwiEgIf7jNTaAhXSUt8KHeDoD7UQMwjRASgBMAE..i&w=1000&h=1000&bih=592&biw=1242&q=patriots%20logo&ved=0ahUKEwiEgIf7jNTaAhXSUt8KHeDoD7UQMwjRASgBMAE&iact=mrc&uact=8", "patriots"));
+
+        // car logos
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/5k5kj54jk.png?itok=2HqPWWz7&resize=1100x619", "toyota"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/6jhj47.png", "cadillac"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412835.png", "audi"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412787.png", "bmw"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-79209988.png", "subaru"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412821.png", "chevrolet"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412777.png", "benz"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-136080259.png", "saab"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412822.png", "volvo"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412916.png", "maserati"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-142002235.png", "porsche"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-73259919.png", "buick"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-119380228.png", "ferrari"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-153648846.png", "mitsubishi"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-175725235.png", "peugeot"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-85255431.png", "infinity"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-152843660.png", "royce"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-86302882.png", "chrysler"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-163412791.png", "alfa romeo"));
+        l.add(new ImageGuess("http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/GettyImages-181665393_0.png", "lamborghini"));
+
+
     }
 
-    static ImageGuess random(){
-        if(l.isEmpty())
+    static ImageGuess random() {
+        if (l.isEmpty())
             initList();
         //return l.get(l.size()-1);
         return l.get(new Random().nextInt(l.size()));
