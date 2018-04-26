@@ -25,6 +25,7 @@ public class BotHandler extends TelegramLongPollingBot {
     private Message message;
     private boolean echo = false;
     static int COUNTER;
+
     @Override
     public void onUpdateReceived(Update update) {
 
