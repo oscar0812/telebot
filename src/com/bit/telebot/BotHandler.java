@@ -58,7 +58,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage("Shutting off...");
                         System.exit(0);
                     }
-                    if(rmsg.equalsIgnoreCase("/pfp")){
+                    if (rmsg.equalsIgnoreCase("/pfp")) {
                         sendPfp(message);
                     }
                 }
@@ -81,9 +81,7 @@ public class BotHandler extends TelegramLongPollingBot {
                     } else if (cmd.equalsIgnoreCase("/math")) {
                         sendMessage(MathSolver.solve(arg));
 
-                    } else if (cmd.equalsIgnoreCase("/ask")){
-                        sendMessage(EightBall.response());
-                    } else if(cmd.equalsIgnoreCase("/detect")){
+                    } else if (cmd.equalsIgnoreCase("/detect")) {
                         String lang = LanguageDetection.detect(arg);
                         sendMessage("Language Detected: " + lang);
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
@@ -122,12 +120,21 @@ public class BotHandler extends TelegramLongPollingBot {
                     mid = mid == 'i' ? 'o' : mid == 'I' ? 'O' : mid == 'o' ? 'i' : 'I';
                     //sendMessage();
                     sendMessage(start + mid + end);
-                } else if (rmsg.contains("no u")){
-                    sendMessage("no " + rmsg);
 
-                }else if (rmsg.contains("^")){
-                    sendMessage("^" + rmsg);
-
+                } else if ((rmsg.toLowerCase().startsWith("no ") && rmsg.toLowerCase().endsWith(" u"))
+                        || rmsg.toLowerCase().equals("u")) {
+                    // message: no u
+                    // reply: no no u
+                    String scrapedText = rmsg.toLowerCase().replaceAll("\\s+", " ");
+                    scrapedText = scrapedText.replaceAll("no ", "");
+                    if (scrapedText.equals("u")) {
+                        sendMessage(rmsg.toLowerCase().replace("u", " no u").
+                                replaceAll("\\s+", " "));
+                    }
+                } else if (rmsg.matches("(.)\\1+") && !rmsg.isEmpty() && rmsg.startsWith("^")) {
+                    // check if string is only made up of one char, if it is
+                    // replay with a longer string of the same char
+                    sendMessage(rmsg + "" + rmsg.charAt(0));
                 }
             }
         }

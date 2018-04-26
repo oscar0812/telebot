@@ -120,7 +120,7 @@ public class LanguageDetection {
 
         language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
         if(language.equals(null)){
-            lang.
+            
         }
         //System.out.println(lang.get(language));
 
