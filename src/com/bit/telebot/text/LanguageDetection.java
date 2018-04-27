@@ -119,9 +119,7 @@ public class LanguageDetection {
         Optional<LdLocale> langs = languageDetector.detect(textObject);
 
         language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
-        if(language.equals(null)){
-            
-        }
+
         //System.out.println(lang.get(language));
 
         return lang.get(language);
