@@ -82,8 +82,12 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage(MathSolver.solve(arg));
 
                     } else if (cmd.equalsIgnoreCase("/detect")) {
-                        String lang = LanguageDetection.detect(arg);
-                        sendMessage("Language Detected: " + lang);
+                        if(!LanguageDetection.detect(arg).equals(null)) {
+                            String lang = LanguageDetection.detect(arg);
+                            sendMessage("Language Detected: " + lang);
+                        } else {
+                            sendMessage("Could not detect language!");
+                        }
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
                             && Database.getInstance().isDev(message_sender.getUserName())) {
 

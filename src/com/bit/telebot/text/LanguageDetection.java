@@ -117,7 +117,7 @@ public class LanguageDetection {
         //query:
         TextObject textObject = textObjectFactory.forText(str);
         Optional<LdLocale> langs = languageDetector.detect(textObject);
-        
+
         language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
 
         //System.out.println(lang.get(language));
