@@ -70,8 +70,19 @@ public class Casino {
                 }
             }
 
-        } else if (text.startsWith("/give")) {
-            handler.sendMessage("giving...");
+        } else if (text.startsWith("/give") && text.trim().contains(" ") && message.getReplyToMessage() != null) {
+            String to = message.getReplyToMessage().getFrom().getUserName();
+            try {
+                int amount = Integer.parseInt(text.substring(text.indexOf(" ")).trim());
+                if (amount > coins) {
+                    handler.sendReplyMessage("Not enough coins!");
+                    return;
+                }
+                Database.getInstance().transferCasino(username, to, amount);
+                handler.sendReplyMessage("Transfered " + amount + " to " + to);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
