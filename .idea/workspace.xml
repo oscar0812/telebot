@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f619f4d-0848-4cf9-baf4-f093482a9b27" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_json_json_20180130.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeleBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TeleBot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/json-20180130.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/Dictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/Dictionary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/ImageGuess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TeleBot/com/bit/telebot/game/ImageGuess.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/game/Casino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/game/Casino.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bit/telebot/game/ImageGuess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bit/telebot/game/ImageGuess.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +31,8 @@
       <file leaf-file-name="ImageGuess.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/ImageGuess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="1695">
+              <caret line="118" selection-start-line="118" selection-end-line="118" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,7 +43,7 @@
       <file leaf-file-name="Dictionary.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/Dictionary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8042">
+            <state relative-caret-position="6975">
               <caret line="466" column="23" selection-start-line="466" selection-start-column="23" selection-end-line="466" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -61,8 +55,8 @@
       <file leaf-file-name="Casino.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/Casino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
+            <state relative-caret-position="282">
+              <caret line="91" column="1" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,8 +67,8 @@
       <file leaf-file-name="GameHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+            <state relative-caret-position="255">
+              <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -97,7 +91,7 @@
       <file leaf-file-name="BotHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
+            <state relative-caret-position="1770">
               <caret line="136" column="60" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -124,14 +118,16 @@
       <find>bot_say_this =</find>
       <find>https://proxy.topixcdn.com/ipicimg/GSC39EJPMEL9LKUV-pad810x389xxGYTRx.img</find>
       <find>proveout</find>
-      <find>nine</find>
       <find>text</find>
       <find>message.getFrom().getUsername()</find>
+      <find>nine</find>
+      <find>new Random()</find>
     </findStrings>
     <replaceStrings>
       <replace>game</replace>
       <replace>handler.sendMessage(</replace>
       <replace>username</replace>
+      <replace>random</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -224,8 +220,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -380,7 +376,8 @@
       <workItem from="1524600760975" duration="3769000" />
       <workItem from="1524665892114" duration="7356000" />
       <workItem from="1524704701342" duration="1643000" />
-      <workItem from="1524759356733" duration="6706000" />
+      <workItem from="1524759356733" duration="7123000" />
+      <workItem from="1525099830855" duration="1881000" />
     </task>
     <task id="LOCAL-00001" summary="sendReplyMessage method">
       <created>1524602689521</created>
@@ -393,42 +390,42 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47571000" />
+    <option name="totallyTimeSpent" value="49869000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="721" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39876354" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32921174" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32921174" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32921174" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39876354" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32921174" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -869,18 +866,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/BotHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="1770">
           <caret line="136" column="60" selection-start-line="136" selection-start-column="60" selection-end-line="136" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/ImageGuess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -889,7 +876,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/Dictionary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8042">
+        <state relative-caret-position="6975">
           <caret line="466" column="23" selection-start-line="466" selection-start-column="23" selection-end-line="466" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -899,8 +886,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/GameHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+        <state relative-caret-position="255">
+          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/ImageGuess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -909,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bit/telebot/game/Casino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
+        <state relative-caret-position="282">
+          <caret line="91" column="1" selection-start-line="91" selection-start-column="1" selection-end-line="91" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
