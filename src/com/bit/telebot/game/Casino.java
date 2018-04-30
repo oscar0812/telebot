@@ -79,7 +79,7 @@ public class Casino {
                     return;
                 }
                 Database.getInstance().transferCasino(username, to, amount);
-                handler.sendReplyMessage("Transfered " + amount + " to " + to);
+                handler.sendReplyMessage("Transferred " + amount + " to " + to);
             } catch (Exception e) {
                 System.out.println(e);
             }
