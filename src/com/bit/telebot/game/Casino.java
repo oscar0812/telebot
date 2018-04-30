@@ -38,7 +38,7 @@ public class Casino {
                 }
                 if (random.nextBoolean()) {
                     // winner, now give them a chance to multiply earning by hitting jackpot
-                    if (random.nextInt(10) == 7) {
+                    if (random.nextInt(100) == 7) {
                         // JACKPOT
                         roll_amount *= random.nextInt(10) + 5;
                         handler.sendReplyMessage("You just hit the jackpot and won " + roll_amount + " coins!");
