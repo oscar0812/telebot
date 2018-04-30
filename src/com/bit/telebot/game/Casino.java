@@ -66,7 +66,7 @@ public class Casino {
                 if (now - last_spin > 5 * MINUTE) {
                     spin(handler, message);
                 } else {
-                    handler.sendReplyMessage("You need to wait " + timeRemaining(last_spin, now) + " to spin again");
+                    handler.sendReplyMessage("You need to wait " + timeRemaining(last_spin, now) + "to spin again");
                 }
             }
 
