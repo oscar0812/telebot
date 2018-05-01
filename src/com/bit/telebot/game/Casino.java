@@ -1,4 +1,8 @@
 package com.bit.telebot.game;
+import com.bit.telebot.BotHandler;
+import com.bit.telebot.Database;
+import org.telegram.telegrambots.api.objects.Message;
+
 import javax.xml.crypto.Data;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,7 +40,7 @@ public class Casino {
                 }
                 if (random.nextBoolean()) {
                     // winner, now give them a chance to multiply earning by hitting jackpot
-                    if (random.nextInt(100) == 7) {
+                    if (random.nextInt(25) == 7) {
                         // JACKPOT
                         roll_amount *= random.nextInt(10) + 5;
                         handler.sendReplyMessage("You just hit the jackpot and won " + roll_amount + " coins!");
