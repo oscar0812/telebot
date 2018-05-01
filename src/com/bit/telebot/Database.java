@@ -134,6 +134,11 @@ public class Database {
         incrementScore(username, "casino_score", points);
     }
 
+    public void transferCasino(String from, String to, int points){
+        addToCasino(from, -points);
+        addToCasino(to, points);
+    }
+
     private long getScore(String username, String game_name) {
         createGameEntry(username);
         String sql = "SELECT " + game_name + " "
