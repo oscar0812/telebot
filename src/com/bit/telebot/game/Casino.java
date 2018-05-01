@@ -29,7 +29,12 @@ public class Casino {
         String username = message.getFrom().getUserName();
         long coins = Database.getInstance().getCasinoScore(username);
         if (text.equalsIgnoreCase("/coins")) {
-            handler.sendReplyMessage("You have " + coins + " coins");
+            if (message.getReplyToMessage() != null) {
+                // getting coins from someone else
+                String from = message.getReplyToMessage().getFrom().getUserName();
+                handler.sendReplyMessage(from+" has "+Database.getInstance().getCasinoScore(from)+" coins!");
+            } else
+                handler.sendReplyMessage("You have " + coins + " coins");
         } else if (text.startsWith("/roll") && text.trim().contains(" ")) {
             // roll int
             try {
@@ -41,6 +46,8 @@ public class Casino {
                 if (random.nextBoolean()) {
                     // winner, now give them a chance to multiply earning by hitting jackpot
                     if (random.nextInt(15) == 7) {
+
+                    if (random.nextInt(10) == 7) {
                         // JACKPOT
                         roll_amount *= random.nextInt(10) + 5;
                         handler.sendReplyMessage("You just hit the jackpot and won " + roll_amount + " coins!");
