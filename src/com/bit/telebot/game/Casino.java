@@ -5,6 +5,8 @@ import com.bit.telebot.Database;
 import org.telegram.telegrambots.api.objects.Message;
 
 import javax.xml.crypto.Data;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -60,7 +62,7 @@ public class Casino {
                 if (now - last_spin > 300_000) {
                     spin(handler, message);
                 } else {
-                    handler.sendReplyMessage("You need to wait 5 min to spin again");
+                    
                 }
             }
 

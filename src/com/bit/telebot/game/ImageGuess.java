@@ -149,7 +149,6 @@ class ImageGuess {
         l.add(new ImageGuess("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Ff%2Ffe%2FShadow_rivals.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FShadow_the_Hedgehog&docid=RPKu3-_z-y3_8M&tbnid=rwwiXU5didFL3M%3A&vet=10ahUKEwiipvrpx9naAhWIk1kKHYwSASoQMwjkASgCMAI..i&w=218&h=455&hl=en&bih=560&biw=1093&q=shadow%20sonic&ved=0ahUKEwiipvrpx9naAhWIk1kKHYwSASoQMwjkASgCMAI&iact=mrc&uact=8", "shadow"));
 
 
-
     }
 
     static ImageGuess random() {

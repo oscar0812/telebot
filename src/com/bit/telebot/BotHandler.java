@@ -1,5 +1,4 @@
 package com.bit.telebot;
-
 import com.bit.telebot.text.LanguageDetection;
 import com.bit.telebot.text.Lyrics;
 import com.bittle.urban.Definition;
@@ -13,26 +12,33 @@ import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.PhotoSize;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
+import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import org.telegram.telegrambots.exceptions.TelegramApiValidationException;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.io.*;
+import java.util.*;
 
 public class BotHandler extends TelegramLongPollingBot {
     private String rmsg, arg, cmd, username;
     private Message message;
     private boolean echo = false;
     static int COUNTER;
-
+    private long chatId;
+    // My path it will be different for me
+    File roast = new File("C:/Users/user/Downloads/Telebot/roasts/YoMama.txt");
     @Override
     public void onUpdateReceived(Update update) {
 
         if (update.hasMessage()) {
             message = update.getMessage();
             User message_sender = message.getFrom();
-
+            chatId = message.getChatId();
             if (message.hasText()) {
                 GameHandler.check(this, update);
                 rmsg = message.getText();
@@ -52,6 +58,28 @@ public class BotHandler extends TelegramLongPollingBot {
                             sendMessage("Echo is Disabled!");
                             COUNTER = 0;
                         }
+                    } else if (rmsg.equalsIgnoreCase("/roast")) {
+                        List<String> Lroast = new ArrayList<>();
+                        BufferedReader br = null;
+                        String roasts = "";
+
+                        try {
+                            br = new BufferedReader(new FileReader(roast));
+
+                            String line = null;
+
+
+                            while ((line = br.readLine()) != null) {
+                                roasts = line;
+                                Lroast.add(roasts);
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        Random rand = new Random();
+                        int randRoast = rand.nextInt(Lroast.size()-1);
+                        sendMessage(Lroast.get(randRoast));
+
                     }
 
                     if (rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())) {
@@ -82,7 +110,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage(MathSolver.solve(arg));
 
                     } else if (cmd.equalsIgnoreCase("/detect")) {
-                        if(!LanguageDetection.detect(arg).equals(null)) {
+                        if(LanguageDetection.detect(arg) != null) {
                             String lang = LanguageDetection.detect(arg);
                             sendMessage("Language Detected: " + lang);
                         } else {
