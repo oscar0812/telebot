@@ -12,11 +12,9 @@ import java.util.Random;
 public class Casino {
     /*
     have the following commands:
-
     /roll
     /spin
     /give user amount
-
      */
 
     // string = username, Long = last time they spinned
@@ -36,35 +34,7 @@ public class Casino {
             } else
                 handler.sendReplyMessage("You have " + coins + " coins");
         } else if (text.startsWith("/roll") && text.trim().contains(" ")) {
-
-            // roll int
-            try {
-                int roll_amount = Integer.parseInt(text.substring(text.indexOf(" ")).trim());
-                if (roll_amount > coins) {
-                    handler.sendReplyMessage("You only have " + coins + " coins");
-                    return;
-                }
-                if (random.nextBoolean()) {
-                    // winner, now give them a chance to multiply earning by hitting jackpot
-                    if (random.nextInt(15) == 7) {
-                        // JACKPOT
-                        roll_amount *= random.nextInt(10) + 5;
-                        handler.sendReplyMessage("You just hit the jackpot and won " + roll_amount + " coins!");
-                    } else
-                        handler.sendReplyMessage("You won " + roll_amount + " coins!");
-
-               } else {
-                    handler.sendReplyMessage("You lost " + roll_amount + " coins!");
-                    roll_amount = -roll_amount;
-                }
-                Database.getInstance().addToCasino(username, roll_amount);
-
-            } catch (Exception ignore) {
-                System.out.println(ignore);
-            }
-
             roll(handler, text, username, coins);
-
         } else if (text.equalsIgnoreCase("/spin")) {
             // random from 0 to 100
             if (!currentPlayers.containsKey(username)) {

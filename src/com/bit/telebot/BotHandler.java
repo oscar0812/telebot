@@ -58,7 +58,30 @@ public class BotHandler extends TelegramLongPollingBot {
                             sendMessage("Echo is Disabled!");
                             COUNTER = 0;
                         }
-                    } else if (rmsg.equalsIgnoreCase("/roast")) {
+                    } else if (rmsg.equals("/test")){
+                        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+                        final List<KeyboardRow> keyboard = ((ReplyKeyboardMarkup) markup).getKeyboard();
+                        for (int i = 0; i < 9; i++)
+                        {
+                            if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 3))
+                            {
+                                keyboard.add(new KeyboardRow());
+                            }
+                            keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText("Bittle is a Skid" + (i + 1)));
+                        }
+                        final SendMessage msg = new SendMessage();
+                        msg.setChatId(Long.toString(message.getChat().getId()));
+                        msg.setText(" l");
+                        msg.setReplyToMessageId(message.getMessageId());
+                        msg.setReplyMarkup(markup);
+                        try
+                        {
+                            execute(msg);
+                        }
+                        catch (TelegramApiException e)
+                        {
+                        }
+                    }else if (rmsg.equalsIgnoreCase("/roast")) {
                         List<String> Lroast = new ArrayList<>();
                         BufferedReader br = null;
                         String roasts = "";
