@@ -60,6 +60,7 @@ public class BotHandler extends TelegramLongPollingBot {
                         }
                     } else if (rmsg.equals("/test")){
                         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+                        markup.setOneTimeKeyboard(true);
                         final List<KeyboardRow> keyboard = ((ReplyKeyboardMarkup) markup).getKeyboard();
                         for (int i = 0; i < 9; i++)
                         {
