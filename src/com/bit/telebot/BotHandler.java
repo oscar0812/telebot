@@ -58,23 +58,40 @@ public class BotHandler extends TelegramLongPollingBot {
                             sendMessage("Echo is Disabled!");
                             COUNTER = 0;
                         }
-                    } else if (rmsg.equals("/test")){
+                    } else if (rmsg.equals("/commands")){
+                        String commands [] = {"NIGGERS","GAMES","BREAKFAST","DINNER"};
                         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
                         markup.setOneTimeKeyboard(true);
                         final List<KeyboardRow> keyboard = ((ReplyKeyboardMarkup) markup).getKeyboard();
-                        for (int i = 0; i < 9; i++)
-                        {
-                            if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 3))
+                       // for (int i = 0; i < commands.length; i++)
+                    //    {
+                            if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 1))
                             {
                                 keyboard.add(new KeyboardRow());
                             }
-                            keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText("Bittle is a Skid" + (i + 1)));
-                        }
-                        final SendMessage msg = new SendMessage();
+
+                            keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText(commands[0]));
+
+                            for (int i = 1; i < commands.length; i++){
+                                if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 1))
+                                {
+                                    keyboard.add(new KeyboardRow());
+                                }
+
+                                keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText(commands[i]));
+
+
+                        //    }
+                    }
+
+                    final SendMessage msg = new SendMessage();
                         msg.setChatId(Long.toString(message.getChat().getId()));
                         msg.setText(" l");
                         msg.setReplyToMessageId(message.getMessageId());
                         msg.setReplyMarkup(markup);
+
+
+
                         try
                         {
                             execute(msg);
