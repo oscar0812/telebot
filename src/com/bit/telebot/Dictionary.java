@@ -1009,7 +1009,7 @@ public class Dictionary {
         return all.trim();
     }
 
-    private String swapWholeString(String str) {
+    public String swapWholeString(String str) {
         char[] arr = str.toCharArray();
         // if string hasn't scrambled after the scrambleWord method
 
@@ -1027,4 +1027,5 @@ public class Dictionary {
 
         return arr;
     }
+
 }

@@ -19,7 +19,6 @@ public class Database {
 
     public Database() {
         createDatabase();
-        createGameTable();
         createAdminTable();
         addDev("OGBittle");
         addDev("Bit_assesive");

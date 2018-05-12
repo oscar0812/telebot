@@ -1,6 +1,7 @@
 package com.bit.telebot;
 import com.bit.telebot.text.LanguageDetection;
 import com.bit.telebot.text.Lyrics;
+import com.bit.telebot.text.ReplyKeyBoard;
 import com.bittle.urban.Definition;
 import com.bittle.urban.UrbanDictionary;
 import com.bit.telebot.game.GameHandler;
@@ -8,6 +9,8 @@ import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.PhotoSize;
 import org.telegram.telegrambots.api.objects.Update;
@@ -22,19 +25,24 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.exceptions.TelegramApiValidationException;
 
 import java.io.*;
+import java.security.Key;
 import java.util.*;
 
 public class BotHandler extends TelegramLongPollingBot {
     private String rmsg, arg, cmd, username;
     private Message message;
+    public static Message msg;
     private boolean echo = false;
     static int COUNTER;
     private long chatId;
+    private boolean coms = false;
     // My path it will be different for me
     File roast = new File("C:/Users/user/Downloads/Telebot/roasts/YoMama.txt");
+
+
     @Override
     public void onUpdateReceived(Update update) {
-
+        msg = update.getMessage();
         if (update.hasMessage()) {
             message = update.getMessage();
             User message_sender = message.getFrom();
@@ -59,49 +67,13 @@ public class BotHandler extends TelegramLongPollingBot {
                             COUNTER = 0;
                         }
                     } else if (rmsg.equals("/commands")){
-                        String commands [] = {"NIGGERS","GAMES","BREAKFAST","DINNER"};
-                        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
-                        markup.setOneTimeKeyboard(true);
-                        final List<KeyboardRow> keyboard = ((ReplyKeyboardMarkup) markup).getKeyboard();
-                       // for (int i = 0; i < commands.length; i++)
-                    //    {
-                            if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 1))
-                            {
-                                keyboard.add(new KeyboardRow());
-                            }
+                        coms = true ;
+                        //First index is the reply message then the rest shows in the keyboard
+                        ReplyKeyBoard.CreateKeyboard("Pick a Command!","GAMES","FUN","PLEASE","SEND","NUDES");
 
-                            keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText(commands[0]));
-
-                            for (int i = 1; i < commands.length; i++){
-                                if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 1))
-                                {
-                                    keyboard.add(new KeyboardRow());
-                                }
-
-                                keyboard.get(keyboard.size() - 1).add(new KeyboardButton().setText(commands[i]));
-
-
-                        //    }
-                    }
-
-                    final SendMessage msg = new SendMessage();
-                        msg.setChatId(Long.toString(message.getChat().getId()));
-                        msg.setText(" l");
-                        msg.setReplyToMessageId(message.getMessageId());
-                        msg.setReplyMarkup(markup);
-
-
-
-                        try
-                        {
-                            execute(msg);
-                        }
-                        catch (TelegramApiException e)
-                        {
-                        }
                     }else if (rmsg.equalsIgnoreCase("/roast")) {
                         List<String> Lroast = new ArrayList<>();
-                        BufferedReader br = null;
+                        BufferedReader br;
                         String roasts = "";
 
                         try {
@@ -181,7 +153,17 @@ public class BotHandler extends TelegramLongPollingBot {
                 }
                 if (echo && !rmsg.equals("/echo")) {
                     sendMessage(username + ": " + rmsg);
+                } else if (coms && !rmsg.equals("/commmands") && message.isReply()) {
+                    if (rmsg.equalsIgnoreCase("Games")) {
+                        ReplyKeyBoard.CreateKeyboard("Pick a game!", "/Type", "/Taboo", "/Guess", "CASINO\uD83D\uDCB0");
+                    } else if (rmsg.equalsIgnoreCase("Casino")) {
+                        ReplyKeyBoard.CreateKeyboard("Ready to gamble?", "/Roll", "/Spin", "/Give 1");
+                    } else if (rmsg.equalsIgnoreCase("Fun")) {
+                        ReplyKeyBoard.CreateKeyboard("Pick a command!", "/ud Bit", "/lyrics Emimen_super man");
+                    } else if (rmsg.equalsIgnoreCase("Casino\uD83D\uDCB0"));
+                    ReplyKeyBoard.CreateKeyboard("MAKE UR BETS PAPI!", "/Spin","/Roll");
                 }
+
 
                 // ping pong ching chong support
                 if (!rmsg.startsWith("/") && rmsg.toLowerCase().endsWith("ing") || rmsg.toLowerCase().endsWith("ong")) {
@@ -212,6 +194,7 @@ public class BotHandler extends TelegramLongPollingBot {
             }
         }
     }
+
 
     @Override
     public String getBotUsername() {
