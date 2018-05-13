@@ -10,6 +10,7 @@ import com.optimaize.langdetect.profiles.LanguageProfileReader;
 import com.optimaize.langdetect.text.CommonTextObjectFactories;
 import com.optimaize.langdetect.text.TextObject;
 import com.optimaize.langdetect.text.TextObjectFactory;
+import org.intellij.lang.annotations.Language;
 
 import java.util.*;
 
@@ -98,6 +99,7 @@ public class LanguageDetection {
     }
 
     public static String detect(String str) {
+        String lObj;
         initList();
         List<LanguageProfile> languageProfiles = null;
         try {
@@ -118,12 +120,15 @@ public class LanguageDetection {
         TextObject textObject = textObjectFactory.forText(str);
         Optional<LdLocale> langs = languageDetector.detect(textObject);
         System.out.println(language);
-
-        language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
-
+try {
+    language = langs.toString().split("Optional.of\\(")[1].split("\\)")[0];
+    lObj = lang.get(language);
+}catch (Exception e){
+    lObj = "empty";
+}
         //System.out.println(lang.get(language));
 
-        return lang.get(language);
+        return lObj;
 
     }
 

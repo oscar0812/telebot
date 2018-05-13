@@ -123,10 +123,12 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage(MathSolver.solve(arg));
 
                     } else if (cmd.equalsIgnoreCase("/detect")) {
-                        if(LanguageDetection.detect(arg) != null) {
+                        if(LanguageDetection.detect(arg) != "empty") {
                             String lang = LanguageDetection.detect(arg);
                             sendMessage("Language Detected: " + lang);
-                        } else {
+                        } else if (LanguageDetection.detect(arg).equals("empty")) {
+                            sendMessage("Not enough words!");
+                        }else{
                             sendMessage("Could not detect language!");
                         }
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
@@ -153,15 +155,21 @@ public class BotHandler extends TelegramLongPollingBot {
                 }
                 if (echo && !rmsg.equals("/echo")) {
                     sendMessage(username + ": " + rmsg);
-                } else if (coms && !rmsg.equals("/commmands") && message.isReply()) {
+                }
+
+
+
+
+                else if (coms && !rmsg.equals("/commmands") && message.isReply()) {
                     if (rmsg.equalsIgnoreCase("Games")) {
-                        ReplyKeyBoard.CreateKeyboard("Pick a game!", "/Type", "/Taboo", "/Guess", "CASINO\uD83D\uDCB0");
+                        ReplyKeyBoard.CreateKeyboard("Pick a game!", "/type ", "/taboo", "/guess\uD83D\uDDBC️", "casino\uD83D\uDCB0");
                     } else if (rmsg.equalsIgnoreCase("Casino")) {
                         ReplyKeyBoard.CreateKeyboard("Ready to gamble?", "/Roll", "/Spin", "/Give 1");
                     } else if (rmsg.equalsIgnoreCase("Fun")) {
-                        ReplyKeyBoard.CreateKeyboard("Pick a command!", "/ud Bit", "/lyrics Emimen_super man");
-                    } else if (rmsg.equalsIgnoreCase("Casino\uD83D\uDCB0"));
-                    ReplyKeyBoard.CreateKeyboard("MAKE UR BETS PAPI!", "/Spin","/Roll");
+                        ReplyKeyBoard.CreateKeyboard("Pick a command!", "/ud Bit", "/lyrics Eminem_superman");
+                    } else if (rmsg.equalsIgnoreCase("Casino\uD83D\uDCB0")) {
+                        ReplyKeyBoard.CreateKeyboard("MAKE UR BETS PAPI!", "/spin", "/roll 1");
+                    }
                 }
 
 
