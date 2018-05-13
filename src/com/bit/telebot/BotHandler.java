@@ -9,23 +9,14 @@ import org.javia.arity.MathSolver;
 import org.telegram.telegrambots.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.PhotoSize;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.User;
-import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import org.telegram.telegrambots.exceptions.TelegramApiValidationException;
 
 import java.io.*;
-import java.security.Key;
 import java.util.*;
 
 public class BotHandler extends TelegramLongPollingBot {
@@ -33,11 +24,6 @@ public class BotHandler extends TelegramLongPollingBot {
     private Message message;
     public static Message msg;
     private boolean echo = false;
-    static int COUNTER;
-    private long chatId;
-    private boolean coms = false;
-    // My path it will be different for me
-    File roast = new File("C:/Users/user/Downloads/Telebot/roasts/YoMama.txt");
 
 
     @Override
@@ -46,65 +32,42 @@ public class BotHandler extends TelegramLongPollingBot {
         if (update.hasMessage()) {
             message = update.getMessage();
             User message_sender = message.getFrom();
-            chatId = message.getChatId();
             if (message.hasText()) {
                 GameHandler.check(this, update);
                 rmsg = message.getText();
                 username = message.getFrom().getUserName();
                 System.out.println(username + ":" + rmsg);
 
-                // COMMAND DOSEN'T TAKE ARGUMENT
-                if (rmsg.contains("/") && !rmsg.contains(" ")) {
-                    if (rmsg.equalsIgnoreCase("/echo")) {
-                        COUNTER++;
-                        if (COUNTER == 1) {
-                            echo = true;
-                            sendMessage("Echo is Enabled!");
+                if (echo) {
+                    sendMessage(username + ": " + rmsg);
+                }else if (rmsg.equalsIgnoreCase("/commands") || rmsg.equalsIgnoreCase("🤖 Commands")) {
+                    //First index is the reply message then the rest shows in the keyboard
+                    ReplyKeyBoard.CreateKeyboard("🤖 Commands", "👾 Games", "😎 Fun");
+                }else if (rmsg.equalsIgnoreCase("👾 Games")) {
+                    ReplyKeyBoard.CreateKeyboard("Pick a game!", "⌨️ Type️", "🤷‍ Scramble", "🤔 Taboo", "🖼 Guess", "💰 Casino", "🏆 Scores");
+                } else if (rmsg.equalsIgnoreCase("/casino") || rmsg.equalsIgnoreCase("💰 Casino")) {
+                    ReplyKeyBoard.CreateKeyboard("Ready to gamble?", "/roll 1", "/spin", "/give 1");
+                } else if (rmsg.equalsIgnoreCase("/fun") || rmsg.equalsIgnoreCase("😎 Fun")) {
+                    ReplyKeyBoard.CreateKeyboard("Have some fun", "/ud Bit", "/lyrics Eminem_superman", "/pfp");
+                } else if (rmsg.equalsIgnoreCase("/pfp") || rmsg.equalsIgnoreCase("👤 PFP")) {
+                    sendPfp(message);
+                } else if (rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())) {
+                    sendMessage("Shutting off...");
+                    System.exit(0);
+                } else if (rmsg.equalsIgnoreCase("/echo")) {
+                    if (!echo) {
+                        echo = true;
+                        sendMessage("Echo is Enabled!");
 
-                        } else {
-                            echo = false;
-                            sendMessage("Echo is Disabled!");
-                            COUNTER = 0;
-                        }
-                    } else if (rmsg.equals("/commands")){
-                        coms = true ;
-                        //First index is the reply message then the rest shows in the keyboard
-                        ReplyKeyBoard.CreateKeyboard("Pick a Command!","GAMES","FUN","PLEASE","SEND","NUDES");
-
-                    }else if (rmsg.equalsIgnoreCase("/roast")) {
-                        List<String> Lroast = new ArrayList<>();
-                        BufferedReader br;
-                        String roasts = "";
-
-                        try {
-                            br = new BufferedReader(new FileReader(roast));
-
-                            String line = null;
-
-
-                            while ((line = br.readLine()) != null) {
-                                roasts = line;
-                                Lroast.add(roasts);
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                        Random rand = new Random();
-                        int randRoast = rand.nextInt(Lroast.size()-1);
-                        sendMessage(Lroast.get(randRoast));
-
-                    }
-
-                    if (rmsg.equalsIgnoreCase("/exit") && Database.getInstance().isDev(message_sender.getUserName())) {
-                        sendMessage("Shutting off...");
-                        System.exit(0);
-                    }
-                    if (rmsg.equalsIgnoreCase("/pfp")) {
-                        sendPfp(message);
+                    } else {
+                        echo = false;
+                        sendMessage("Echo is Disabled!");
                     }
                 }
+
+
                 // COMMAND TAKES ARGUMENT
-                else if (rmsg.contains(" ") && rmsg.startsWith("/")) {
+                if (rmsg.contains(" ") && rmsg.startsWith("/")) {
                     cmd = rmsg.split("\\s+")[0];
                     arg = rmsg.substring(rmsg.indexOf(" ")).trim();
 
@@ -123,12 +86,12 @@ public class BotHandler extends TelegramLongPollingBot {
                         sendMessage(MathSolver.solve(arg));
 
                     } else if (cmd.equalsIgnoreCase("/detect")) {
-                        if(LanguageDetection.detect(arg) != "empty") {
+                        if (LanguageDetection.detect(arg) != "empty") {
                             String lang = LanguageDetection.detect(arg);
                             sendMessage("Language Detected: " + lang);
                         } else if (LanguageDetection.detect(arg).equals("empty")) {
                             sendMessage("Not enough words!");
-                        }else{
+                        } else {
                             sendMessage("Could not detect language!");
                         }
                     } else if (!arg.contains(" ") && cmd.equalsIgnoreCase("/admin")
@@ -152,24 +115,6 @@ public class BotHandler extends TelegramLongPollingBot {
                         }
                     }
 
-                }
-                if (echo && !rmsg.equals("/echo")) {
-                    sendMessage(username + ": " + rmsg);
-                }
-
-
-
-
-                else if (coms && !rmsg.equals("/commmands") && message.isReply()) {
-                    if (rmsg.equalsIgnoreCase("Games")) {
-                        ReplyKeyBoard.CreateKeyboard("Pick a game!", "/type ", "/taboo", "/guess\uD83D\uDDBC️", "casino\uD83D\uDCB0");
-                    } else if (rmsg.equalsIgnoreCase("Casino")) {
-                        ReplyKeyBoard.CreateKeyboard("Ready to gamble?", "/Roll", "/Spin", "/Give 1");
-                    } else if (rmsg.equalsIgnoreCase("Fun")) {
-                        ReplyKeyBoard.CreateKeyboard("Pick a command!", "/ud Bit", "/lyrics Eminem_superman");
-                    } else if (rmsg.equalsIgnoreCase("Casino\uD83D\uDCB0")) {
-                        ReplyKeyBoard.CreateKeyboard("MAKE UR BETS PAPI!", "/spin", "/roll 1");
-                    }
                 }
 
 

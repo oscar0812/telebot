@@ -17,7 +17,7 @@ public class ReplyKeyBoard {
     public static SendMessage CreateKeyboard(String...arg){
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
         markup.setOneTimeKeyboard(true);
-        final List<KeyboardRow> keyboard = ((ReplyKeyboardMarkup) markup).getKeyboard();
+        final List<KeyboardRow> keyboard = markup.getKeyboard();
         // for (int i = 0; i < commands.length; i++)
         //    {
         if (keyboard.isEmpty() || (keyboard.get(keyboard.size() - 1).size() >= 1))

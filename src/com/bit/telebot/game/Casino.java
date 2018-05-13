@@ -3,9 +3,6 @@ import com.bit.telebot.BotHandler;
 import com.bit.telebot.Database;
 import org.telegram.telegrambots.api.objects.Message;
 
-import javax.xml.crypto.Data;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Random;
 

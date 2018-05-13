@@ -109,50 +109,47 @@ public class GameHandler {
         }
         game = currentGames.get(chat_id);
 
-        switch (message_text_lower) {
-            case "/type":
-                if (game.current_type_word.isEmpty()) {
-                    game.current_type_word = dictionary.getRandomWord();
-                    game.is_type = true;
-                    game.type_start = System.currentTimeMillis();
-                }
+        if (message_text_lower.equals("/type") || message_text_lower.equals("⌨ type️")) {
+            if (game.current_type_word.isEmpty()) {
+                game.current_type_word = dictionary.getRandomWord();
+                game.is_type = true;
+                game.type_start = System.currentTimeMillis();
+            }
 
-                handler.sendMessage("Type: " + game.current_type_word);
-                break;
-            case "/scramble":
-                if (game.current_scramble_word.isEmpty()) {
-                    game.current_unscrambled_word = dictionary.getRandomWord();
-                    game.current_scramble_word = dictionary.scrambleWord(game.current_unscrambled_word);
-                    game.is_scramble = true;
-                }
+            handler.sendMessage("Type: " + game.current_type_word);
 
-                handler.sendMessage("Unscramble: " + game.current_scramble_word);
-                break;
-            case "/taboo":
-                if (!message.getChat().isUserChat()) {
+        } else if (message_text_lower.equals("/scramble") || message_text_lower.equals("🤷‍ scramble")) {
+            if (game.current_scramble_word.isEmpty()) {
+                game.current_unscrambled_word = dictionary.getRandomWord();
+                game.current_scramble_word = dictionary.scrambleWord(game.current_unscrambled_word);
+                game.is_scramble = true;
+            }
 
-                    if (!game.current_taboo_word.isEmpty()) {
-                        handler.sendMessage(game.player_username + " has the word.", chat_id);
-                    } else {
-                        game.current_taboo_word = dictionary.getRandomWord();
-                        game.player_username = message_sender.getUserName();
-                        game.is_taboo = true;
-                        // pm the person
-                        handler.sendMessage("Word is " + game.current_taboo_word, message_sender.getId());
-                        // send notification to group
-                        handler.sendMessage("Word sent to " + message_sender.getUserName());
-                    }
+            handler.sendMessage("Unscramble: " + game.current_scramble_word);
+
+        } else if (message_text_lower.equals("/taboo") || message_text_lower.equals("🤔 taboo")) {
+            if (!message.getChat().isUserChat()) {
+
+                if (!game.current_taboo_word.isEmpty()) {
+                    handler.sendMessage(game.player_username + " has the word.", chat_id);
                 } else {
-                    handler.sendMessage("Taboo must be played in group chats.");
+                    game.current_taboo_word = dictionary.getRandomWord();
+                    game.player_username = message_sender.getUserName();
+                    game.is_taboo = true;
+                    // pm the person
+                    handler.sendMessage("Word is " + game.current_taboo_word, message_sender.getId());
+                    // send notification to group
+                    handler.sendMessage("Word sent to " + message_sender.getUserName());
                 }
-                break;
-            case "/guess":
+            } else {
+                handler.sendMessage("Taboo must be played in group chats.");
+            }
 
-                if (game.guessGame == null) {
-                    game.guessGame = ImageGuess.random();
-                }
-                handler.sendPhoto(game.guessGame.getUrl());
-                break;
+        } else if (message_text_lower.equals("/guess") || message_text_lower.equals("🖼 guess")) {
+            if (game.guessGame == null) {
+                game.guessGame = ImageGuess.random();
+            }
+            handler.sendPhoto(game.guessGame.getUrl());
         }
 
         if (message_text_lower.equals("/reset") && Database.getInstance().isAdmin(message_sender.getUserName())) {
@@ -181,7 +178,7 @@ public class GameHandler {
 
             }
 
-        } else if (message_text_lower.equals("/scores")) {
+        } else if (message_text_lower.equals("/scores") || message_text_lower.equals("🏆 scores")) {
             // trying to get scores
             Database d = Database.getInstance();
             handler.sendReplyMessage("Type: " + d.getTypeScore(message_sender.getUserName()) +
